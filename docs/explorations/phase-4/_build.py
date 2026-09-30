@@ -356,7 +356,7 @@ def produtos(mode="accordion", scroller=False, display_ref=False, align="left"):
             <li><p class="micro micro--dot" data-type>Equipamento</p></li>
             <li><p class="micro"><span class="mono">04 // KU01 · BE01 · CV01 · TS02</span></p></li>
           </ul>
-          <h2 id="produtos-title">Equipa-te para a competição</h2>
+          <h2 id="produtos-title"><span class="nobr">Equipa-te</span> para a competição</h2>
           <hr class="rule rule--key">
           <p class="grey">{lead} Para encomendas e informações: <a href="mailto:info@shomen-sports.com">info@shomen-sports.com</a></p>
         </div>
@@ -528,7 +528,7 @@ def footband():
       <div class="wrap">
         <div class="contact" data-reveal>
           <p class="micro micro--dot" data-type>Contacto // encomendas e parcerias</p>
-          <h2 id="contacto-title" class="h2">CONTACTa-NOS</h2>
+          <h2 id="contacto-title" class="h2 nobr">CONTACTa-NOS</h2>
           <hr class="rule rule--key">
           <p>Pretendes mais informação sobre os produtos ou é um clube e pretende discutir parcerias? Entra em contacto!</p>
           <div class="actions">
@@ -673,5 +673,73 @@ def build():
         print(name, len(html) // 1024, "KB")
 
 
+# ---------------------------------------------------------------- index.html (Variant A, refined)
+HEAD_INDEX = """<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shomen Sports | Equipamento de Karate</title>
+  <meta name="description" content="Shomen Sports: equipamento de competição de kumite criado em Portugal, por atletas para atletas. Kimonos, cintos e vestuário técnico, e apoio à próxima geração de campeões do karate português.">
+  <link rel="canonical" href="https://www.shomen-sports.com/">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Shomen Sports">
+  <meta property="og:title" content="Shomen Sports | Equipamento de Karate">
+  <meta property="og:description" content="Equipamento de competição de kumite criado em Portugal, por atletas para atletas.">
+  <meta property="og:url" content="https://www.shomen-sports.com/">
+  <meta property="og:image" content="https://www.shomen-sports.com/assets/img/originals/social-media-image.png">
+  <meta property="og:image:width" content="1680">
+  <meta property="og:image:height" content="840">
+  <meta property="og:locale" content="pt_PT">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Shomen Sports | Equipamento de Karate">
+  <meta name="twitter:description" content="Equipamento de competição de kumite criado em Portugal, por atletas para atletas.">
+  <meta name="twitter:image" content="https://www.shomen-sports.com/assets/img/originals/social-media-image.png">
+  <style>
+"""
+
+CSS_INDEX = """
+/* ---------- Phase 4 index refinements (Variant A "Directo") ---------- */
+.product__display { display: none; }
+.row__big { display: none; }
+@media (min-width: 720px) { .row__big { display: block; max-width: 320px; } }
+/* Compromisso: 03 as the display moment on desktop, a compact row on phones */
+.fact__aside { display: flex; justify-content: space-between; align-items: end; gap: 16px; }
+.readout--display .readout__value { font-size: clamp(56px, 12vw, 160px); }
+@media (min-width: 900px) { .fact__aside { display: grid; } }
+/* roster: readouts sit beside the thumbnail on phones, the toggle in the corner */
+.row { position: relative; }
+@media (max-width: 719.98px) {
+  .row { grid-template-columns: 80px 1fr; grid-template-areas: "thumb head" "top top" "more more"; padding: 10px; gap: 8px 12px; }
+  .row__head { padding-right: 56px; }
+  .row__toggle { position: absolute; top: 4px; right: 10px; z-index: 2; }
+}
+/* contact band */
+.footband { padding-block: var(--space-sm) 24px; }
+.contact .h2 { font-size: clamp(34px, 7vw, 88px); }
+"""
+
+
+def build_index():
+    css = (HERE / "_base.css").read_text(encoding="utf-8").replace("../../../assets/", "assets/")
+    css = css.replace("Phase 4 exploration base. Shared by variant-a/b/c.html.", "Phase 4 single-file site (Variant A \"Directo\" of docs/explorations/phase-4). Everything (CSS, JS, fonts, grain) lives in this file; only the photos are external (assets/img/).")
+    css = css.replace("Fonts/grain by file path here; index.html inlines them.", "Author with file paths under assets/ for fonts and grain, then run python tools/inline-assets.py before committing.")
+    js = (HERE / "_base.js").read_text(encoding="utf-8").replace("Phase 4 exploration script (shared by the variants; inlined into index.html later).", "Phase 4 script.")
+    body = [hero_full(), ticker(), produtos("accordion"), compromisso("02", display=True), strip(), atletas_roster(), footband()]
+    nl = chr(10)
+    html = (HEAD_INDEX + css + CSS_INDEX + "  </style>" + nl + "</head>" + nl + '<body data-key="red">' + nl + nav(False) + nl + '  <main id="conteudo">' + nl
+            + "".join(body) + "  </main>" + nl + gallery_dialog() + "  <script>" + nl + js + "  </script>" + nl + "</body>" + nl + "</html>" + nl)
+    html = html.replace("../../../assets/", "assets/")
+    out = HERE.parent.parent.parent / "index.html"
+    out.write_text(html, encoding="utf-8")
+    print("index.html", len(html) // 1024, "KB (before inlining fonts/grain)")
+
+
 if __name__ == "__main__":
-    build()
+    import sys
+    if "--index" in sys.argv:
+        build_index()
+    else:
+        build()
