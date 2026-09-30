@@ -7,17 +7,17 @@ Static site, **one file**: `index.html` at the repo root contains all markup, CS
 - **Phase 1** (content + basic dark layout) → `archive/phase-1/`
 - **Phase 2** (HUD brand system, multi-page) → `archive/phase-2/`
 - **Phase 3** (single self-contained `index.html`, red + blue only, products as modals) → `archive/phase-3/`
-- **Phase 4** (this, branch `phase-4-onepager`): truly one page, more compact, more motion. Products open **inline** in an expanding sheet under the tiles, Compromisso folds behind "Ler mais", the two bands became one statement strip, athletes are a roster with "+ n", contact lives in the footer band. Layout is **Variant A "Directo"** of `docs/explorations/phase-4/` (products before Compromisso, full-bleed hero, accordion sheet, roster, top bar): chosen because it is the shortest path from hero to contact with nothing hidden behind a horizontal gesture. See the README there for the other two variants and the verdicts.
+- **Phase 4** (this, branch `phase-4-onepager`): truly one page, more compact, more motion. Products open **inline** in an expanding sheet under the tiles, Compromisso folds behind "Ler mais", the two bands became one statement strip, athletes are a roster with the **full palmarés as a grid of readouts** (Pedro's review: no "+ n"), the hero ends in a stats bar (CTAs + three settling numbers), contact lives in the footer band. Ambient HUD shapes drift behind the content and glitch (slice offsets); photos without faces get the same slice glitch. Layout is **Variant A "Directo"** of `docs/explorations/phase-4/` (products before Compromisso, full-bleed hero, accordion sheet, roster, top bar): chosen because it is the shortest path from hero to contact with nothing hidden behind a horizontal gesture. See the README there for the other two variants and the verdicts.
 - **Before starting any new phase**, copy everything in the repo (except `.git` and the contents of `archive/`) into a new versioned folder `archive/phase-N/` and commit that snapshot first. Pedro's rule, no exceptions.
 
 ## Compactness targets (Phase 4)
 
 | | Phase 3 | Phase 4 | target |
 |---|---|---|---|
-| 390 px (844 px viewport) | 10 802 px · 12.8 vh | **4 412 px · 5.2 vh** | ≤ 5.5 vh |
-| 1280 px (800 px viewport) | 7 813 px · 9.8 vh | **3 985 px · 5.0 vh** | ≤ 5 vh |
+| 390 px (844 px viewport) | 10 802 px · 12.8 vh | **5 060 px · 6.0 vh** | ≤ 5.5 vh |
+| 1280 px (800 px viewport) | 7 813 px · 9.8 vh | **4 346 px · 5.4 vh** | ≤ 5 vh |
 
-Measured with `document.body.scrollHeight`, sheet closed, `prefers-reduced-motion: reduce`. Hero ≤ 92 vh; the first product tile is on screen on scroll one at both widths. Keep it that way: anything added to the top of the page pushes the products down.
+Measured with `document.body.scrollHeight`, sheet closed, `prefers-reduced-motion: reduce`. The first cut (4 412 / 3 985 px) met the targets; Pedro's review asked for the full palmarés always visible and a stronger hero bar, which is the ~650 / ~360 px above target. Hero ≤ 92 vh; the first product tile is on screen on scroll one at both widths. Keep it that way: anything added to the top of the page pushes the products down.
 
 ## Shipping a new version
 
@@ -91,7 +91,12 @@ Everything lives in the "motion" CSS block and the `<script>`. `html.js` gates t
 | Readout digits **settle** (`[data-settle]`) | reveal / sheet open | 700 ms random digits → value | off |
 | `[data-reveal]` fade + rise 14 px; section heads slide 28 px from their side (`data-reveal="left"`) | IntersectionObserver, once, threshold .12 | .6 s ease-out | static |
 | `.rule--key` grows | reveal | .7 s ease-out, .25 s delay | static |
-| `.readouts li` cascade | reveal / "+ n" | .45 s, 60 ms stagger | static |
+| `.readouts li` / `.palmares li` cascade | reveal | .45 s, 50–60 ms stagger | static |
+| Hero stats bar (three `[data-settle]` numbers, key rule) | load, `--i` | reveal .6 s + settle 700 ms | static |
+| **HUD shapes** (`.fx`, fixed layer behind the content: frame, reticle, bar, bracket, square, cross) drift | ambient | 22–38 s ease-in-out alternate, 90 × 140 px travel | off |
+| HUD shapes **slice glitch** (translateX ±8 px + `clip-path` insets, 3 frames, ~5 % of the cycle) | ambient | 8–14 s cycles, staggered delays | off |
+| HUD shapes **burst** | while scrolling (`.fx.is-scrolling`, 600 ms after the last scroll event) | .5 s, 4 frames | off |
+| **Image slice glitch** (`.photo[data-glitch]`: two clipped clones offset ±12 px, no colour fringes) on the hero photo, kit + belts tiles, sleeve photo. Never on faces, text or the logo | ambient | 8–10 s cycles, 3 frames each | off (clones not created) |
 | Panel **tick flash** (`.is-flash`) | reveal, sheet open | 150 ms, 60 ms stagger | off |
 | Hero photo **parallax + slow zoom** | `animation-timeline: scroll(root)`, 0–100 vh: translateY 0→28 vh, scale 1.14→1.24 | linear with scroll | `scale(1.02)` static |
 | Hero mouse tilt (`--mx/--my`) | pointer devices | direct | off |
@@ -113,7 +118,7 @@ Everything lives in the "motion" CSS block and the `<script>`. `html.js` gates t
 | Menu overlay + items rise | toggle (< 720 px) | .3 s / .5 s, 70 ms stagger | off |
 | Gallery dialog + backdrop | "Ver galeria completa" | .45 s / .3 s | off |
 
-Still banned: glitch, VHS, scanlines, chromatic aberration, matrix rain, anything that distorts text, the logo or a face, duotones, mirrored photos, `border-radius`. Photos: brightness/saturation filter on the hero for legibility is allowed.
+Glitch is allowed since Pedro's Phase 4 review, **only** as horizontal slice offsets (`clip-path` + translate, a few frames, no colour fringes) on the HUD shapes and on photos without a face (`data-glitch`). Still banned: VHS, scanlines, chromatic aberration, matrix rain, anything that distorts text, the logo or a face, duotones, mirrored photos, `border-radius`. Photos: brightness/saturation filter on the hero for legibility is allowed.
 
 ## How to add or edit a product
 
@@ -125,7 +130,7 @@ Still banned: glitch, VHS, scanlines, chromatic aberration, matrix rain, anythin
 ## How to add or edit an athlete
 
 1. Photo into `assets/img/originals/`, run the optimiser.
-2. Copy an `<li class="panel panel--flush row">` in `#atletas`. Set `id`, `data-key` (next in the red/blue rotation), the thumbnail (`alt` pt-PT, `pos-top` if the head is near the top), `ATLETA // NN`, the name (`.name__first` Light / `.name__last` Black), the **two** headline results in `ul.row__top`, the `+ NN` toggle (`data-toggle="more-<id>"`, `data-labels="+ NN|Fechar"`; use `Ver|Fechar` when there is nothing beyond the two results but there is a handle), and in `.row__more .more` the remaining results as `<li style="--i: n"><span class="val">7x</span><span class="lab">…</span></li>` (empty `.val` when the line has no leading numeral; weights/years wrapped in `.mono`), the 4:5 photo (`.row__big`) and `@handle` (omit rather than guess).
+2. Copy an `<li class="panel panel--flush row">` in `#atletas`. Set `id`, `data-key` (next in the red/blue rotation), the photo (`.row__thumb`, 4:5, `alt` pt-PT, `pos-top` if the head is near the top; never `data-glitch` on a face), `ATLETA // NN`, the name (`.name__first` Light / `.name__last` Black), `@handle` (omit rather than guess), `PALMARÉS // NN` and every result as a cell of `ul.palmares`: `<li style="--i: n"><span class="val">7x</span><span class="lab">…</span></li>` (empty `.val` when the line has no leading numeral; weights/years wrapped in `.mono`). The grid is 2 columns on phones, 3 from 720 px.
 3. Update the counters: `ATLETAS // NN` and every `ATLETAS APOIADOS` readout (hero + Compromisso). Count only live rows. Guilherme and Santiago Gonçalves are still pending photo + achievements (see TODOs).
 
 ## Content rules (short version)
@@ -148,7 +153,7 @@ Still banned: glitch, VHS, scanlines, chromatic aberration, matrix rain, anythin
 ```bash
 python -m http.server 8000
 python tools/screenshots.py http://localhost:8000 docs/screenshots/phase-4 index   # 0 px overflow, 0 console errors
-python tools/motion-test.py http://localhost:8000                                   # 0 failures, prints page heights
+python tools/motion-test.py http://localhost:8000                                   # 0 failures, prints page heights (expects the settle values 03,04,2025,03)
 grep -c 'url("assets/' index.html        # must be 0
 grep -n "green\|yellow\|glitch\|scanline\|border-radius" index.html   # only border-radius: 0
 grep -rin "squarespace\|€\|Carrinho\|Reservar\|cart\|prémio" index.html   # must be empty

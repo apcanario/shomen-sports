@@ -213,6 +213,35 @@
     });
   }
 
+  /* ---------- glitch: two clipped clones of the photo inside .photo[data-glitch] (never on faces, text or the logo);
+     the HUD shapes get a short burst while the page scrolls ---------- */
+  if (!reduce) {
+    document.querySelectorAll('.photo[data-glitch]').forEach(function (ph, i) {
+      var img = ph.querySelector('img');
+      if (!img) { return; }
+      ['a', 'b'].forEach(function (k) {
+        var layer = document.createElement('span');
+        layer.className = 'glitch glitch--' + k;
+        layer.setAttribute('aria-hidden', 'true');
+        var clone = img.cloneNode(false);
+        clone.alt = ''; clone.loading = 'lazy'; clone.removeAttribute('fetchpriority'); clone.removeAttribute('id');
+        layer.appendChild(clone);
+        ph.appendChild(layer);
+      });
+      ph.style.setProperty('--go', (i * 2.3).toFixed(1) + 's');
+      ph.style.setProperty('--gd', (8 + (i % 3)) + 's');
+    });
+    var fx = document.querySelector('.fx');
+    var fxTimer = 0;
+    if (fx) {
+      window.addEventListener('scroll', function () {
+        if (!fxTimer) { fx.classList.add('is-scrolling'); }
+        window.clearTimeout(fxTimer);
+        fxTimer = window.setTimeout(function () { fx.classList.remove('is-scrolling'); fxTimer = 0; }, 600);
+      }, { passive: true });
+    }
+  }
+
   /* ---------- generic "ler mais" / "+ n" toggles ---------- */
   document.querySelectorAll('[data-toggle]').forEach(function (b) {
     var target = document.getElementById(b.getAttribute('data-toggle'));

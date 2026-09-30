@@ -73,6 +73,17 @@ Not from the old site; any of these can be cut without touching the content rule
 2. **The hero glow + slow zoom together.** The red radial glow (8 s pulse) under a photo that also parallaxes and zooms with scroll is the busiest screen. First candidate: remove `.hero__glow`; second: cap the zoom at 1.18 in `heroScroll`.
 3. **The panel tick flash.** Every panel flashes its corner ticks red/blue for 150 ms as it enters, and again when the sheet opens. Cheap to remove (one `flash()` call in the script). Related: the athlete thumbnails at 72–96 px are small for portraits; if the roster feels too anonymous, the `.row__big` photo could show on desktop in the closed state at the cost of ~150 px per row.
 
+## Iteration 2 (Pedro's review, same day)
+
+Asked for: the full palmarés visible, a header with more visual interest around the CTAs and the numbers, and glitches on images and geometric shapes moving through the site.
+
+- **Athletes.** No more "+ n". Each row is photo (4:5, 168 px on desktop) · name · handle · the complete palmarés as a **grid of readout cells** (value in mono 22 px + label), 3 columns from 720 px, 2 on phones, 1 px HUD grid lines. Leonor 6, André 5, Martim 1 results, all visible, cascading in on reveal.
+- **Hero bar.** A key-coloured rule closes the hero, then the two CTAs (52 px) on the left and **three settling numbers** on the right (`ATLETAS APOIADOS 03`, `PRODUTOS 04`, `EST. 2025`), each on its own tick. One row at 390 too.
+- **Glitch, within limits.** The brief and CLAUDE.md banned glitch; kept the part that does not distort text, the logo or a face: (1) a fixed layer of six HUD shapes (frame with a key corner, reticle, key bar, bracket, alt-colour square, cross) drifts behind the content over 22–38 s and slice-glitches for a few frames every 8–14 s, plus a 0.5 s burst while the page scrolls; (2) the hero photo, the kit and belts tiles and the sleeve photo get two clipped clones that flash offset slices (±12 px) every 8–10 s. No chromatic aberration, no scanlines, no colour fringes, nothing on faces (corta-vento, t-shirt, kick and athlete photos are untouched). Reduced motion: shapes static, clones not created.
+- **Heights now:** 5 060 px / 6.0 vh at 390 and 4 346 px / 5.4 vh at 1280 (first cut: 4 412 / 3 985). Above the original targets by the full palmarés (+ ~500 px on phones) and the taller hero bar; still less than half of Phase 3. Open state (sheet + Ler mais): 7 106 / 5 291 px.
+- Checks re-run: motion test 0 failures (now also asserts 12 palmarés cells visible, 8 glitch layers, scroll burst, none of it under reduced motion), 0 px overflow, 0 console errors, key colour ≤ 3.7 %, Nu 0 errors, Lighthouse accessibility 100.
+- Tone-down candidates, revised: the image slice glitch on the hero (remove `data-glitch` from `.hero__photo`), the HUD shapes' scroll burst (`.fx.is-scrolling` rule), the type-on labels.
+
 ## Open TODOs (unchanged)
 
 Compromisso copy for Pedro's review; "Ultra Level" probably "Ultra Leve"; Martim's Instagram missing; André's handle differs between old site and brief; Guilherme and Santiago pending photo + achievements (Phase 3 skeletons in the archive).

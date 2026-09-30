@@ -180,14 +180,18 @@ HERO_MICRO = """<ul class="microbar microbar--start">
             <li><p class="micro" data-reveal data-type style="--i: 2"><span class="mono">EST. 2025</span></p></li>
           </ul>"""
 
-HERO_FOOT = """<div class="hero__foot">
-            <div class="actions" data-reveal style="--i: 4">
-              <a class="btn btn--primary" href="#produtos">Ver produtos</a>
-              <a class="btn" href="#atletas">Conhecer os atletas</a>
-            </div>
-            <div class="hero__readouts" data-reveal style="--i: 5">
-              <div class="readout readout--end readout--sm"><p class="micro readout__label">Atletas apoiados</p><p class="readout__value" data-settle>03</p></div>
-              <div class="readout readout--end"><p class="micro readout__label">Est.</p><p class="readout__value" data-settle>2025</p></div>
+HERO_FOOT = """<div class="hero__foot" data-reveal style="--i: 4">
+            <hr class="rule hero__rule" aria-hidden="true">
+            <div class="hero__bar">
+              <div class="actions">
+                <a class="btn btn--primary btn--lg" href="#produtos">Ver produtos</a>
+                <a class="btn btn--lg" href="#atletas">Conhecer os atletas</a>
+              </div>
+              <ul class="hero__stats">
+                <li class="readout" style="--i: 0"><p class="micro readout__label">Atletas apoiados</p><p class="readout__value" data-settle>03</p></li>
+                <li class="readout" style="--i: 1"><p class="micro readout__label">Produtos</p><p class="readout__value" data-settle>04</p></li>
+                <li class="readout" style="--i: 2"><p class="micro readout__label">Est.</p><p class="readout__value" data-settle>2025</p></li>
+              </ul>
             </div>
           </div>"""
 
@@ -196,7 +200,7 @@ HERO_IMG = f'<img src="{A}img_5512-1600.webp" srcset="{A}img_5512-800.webp 800w,
 
 def hero_full():
     return f"""    <section class="hero" aria-labelledby="hero-title">
-      <div class="photo hero__photo" data-parallax="0.28" data-mouse>{HERO_IMG}</div>
+      <div class="photo hero__photo" data-parallax="0.28" data-mouse data-glitch>{HERO_IMG}</div>
       <div class="hero__scrim" aria-hidden="true"></div>
       <div class="hero__glow" aria-hidden="true"></div>
       <p class="hero__vword" aria-hidden="true">Shomen</p>
@@ -275,9 +279,10 @@ def compromisso(sec="01", display=False):
 def tile(p, i, extra=""):
     f, cls, alt = p["tile"]
     cls = f' class="{cls}"' if cls else ""
+    gl = " data-glitch" if p["id"] in ("kit", "cintos") else ""
     return f"""          <li class="panel panel--flush panel--hover tile" data-reveal style="--i: {i}">
             <button class="tile__btn" type="button" data-product="{p['id']}" aria-expanded="false" aria-controls="prod-{p['id']}">
-              <span class="photo zoom"><img{cls} src="{A}{f}-800.webp" srcset="{A}{f}-800.webp 800w, {A}{f}-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="{alt}"></span>
+              <span class="photo zoom"{gl}><img{cls} src="{A}{f}-800.webp" srcset="{A}{f}-800.webp 800w, {A}{f}-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="{alt}"></span>
               <span class="tile__body">
                 <span class="tile__ref"><span>REF. {p['ref']}</span><span class="open"><span>ABRIR</span> →</span></span>
                 <span class="tile__name">{p['name']}</span>
@@ -377,7 +382,7 @@ def strip(label_a="Competição", label_b="Materiais"):
     return f"""    <section class="section section--tight" aria-label="Competição e materiais">
       <div class="wrap strip">
         <div class="panel panel--flush statement" data-reveal="left">
-          <div class="photo photo--1x1 parallax" data-parallax="0.1"><img src="{A}img_5811-800.webp" width="800" height="1200" loading="lazy" alt="Pormenor das letras Shomen bordadas a azul na manga de um kimono branco"></div>
+          <div class="photo photo--1x1 parallax" data-parallax="0.1" data-glitch><img src="{A}img_5811-800.webp" width="800" height="1200" loading="lazy" alt="Pormenor das letras Shomen bordadas a azul na manga de um kimono branco"></div>
           <div class="statement__body">
             <p class="micro micro--dot" data-type>{label_a}</p>
             <h2 class="h2--band">prontos para TODAS AS COMPETIÇÕES<br>FNK-P, OPENS nacionais e internacionais</h2>
@@ -434,30 +439,20 @@ def atletas_head(align="left", label="TEAM SHOMEN // ÉPOCA 2026/27"):
 def atletas_roster():
     rows = ""
     for i, a in enumerate(ATHLETES):
-        rest = len(a["wins"]) - 2
-        more = ""
-        if rest > 0 or a["handle"]:
-            more = f"""            <div class="row__more">
-              <div class="more" id="more-{a['id']}" hidden>
-                <div>
-                  <div class="stack"><p class="micro">Palmarés completo</p>{wins_list(a, 2) if rest > 0 else ""}</div>
-                  <div class="stack"><div class="photo photo--4x5 zoom row__big">{athlete_photo(a, "(min-width: 720px) 40vw, calc(100vw - 32px)")}</div>{handle(a)}</div>
-                </div>
-              </div>
-            </div>
-"""
-        tog = (f'<button class="link-btn row__toggle" type="button" aria-expanded="false" aria-controls="more-{a["id"]}" data-toggle="more-{a["id"]}" data-labels="+ {rest:02d}|Fechar"><span>+ {rest:02d}</span></button>' if rest > 0
-               else (f'<button class="link-btn row__toggle" type="button" aria-expanded="false" aria-controls="more-{a["id"]}" data-toggle="more-{a["id"]}" data-labels="Ver|Fechar"><span>Ver</span></button>' if a["handle"] else ""))
         tag = f'<p class="micro"><span class="mono">{a["tag"]}</span></p>' if a["tag"] else ""
+        cells = "".join(f'<li style="--i: {j}"><span class="val">{v}</span><span class="lab">{lab}</span></li>' for j, (v, lab) in enumerate(a["wins"]))
         rows += f"""          <li class="panel panel--flush row" id="{a['id']}" data-key="{a['key']}" data-reveal style="--i: {i}">
-            <div class="photo row__thumb">{athlete_photo(a, "96px")}</div>
+            <div class="photo row__thumb zoom">{athlete_photo(a, "(min-width: 720px) 168px, 104px")}</div>
             <div class="row__head">
               <div class="row__idx"><p class="micro micro--dot">Atleta // <span class="mono">{a['n']}</span></p>{tag}</div>
               <h3 class="name"><span class="name__first">{a['first']}</span><span class="name__last">{a['last']}</span></h3>
+              {handle(a)}
             </div>
-            <ul class="row__top">{"".join(f'<li><span class="val">{v}</span><span class="lab">{lab}</span></li>' for v, lab in a["wins"][:2])}</ul>
-            {tog}
-{more}          </li>
+            <div class="row__pal">
+              <p class="micro">Palmarés <span class="mono">// {len(a['wins']):02d}</span></p>
+              <ul class="palmares">{cells}</ul>
+            </div>
+          </li>
 """
     return f"""    <section class="section" id="atletas" aria-labelledby="atletas-title">
       <div class="wrap">
@@ -703,22 +698,27 @@ HEAD_INDEX = """<!DOCTYPE html>
 CSS_INDEX = """
 /* ---------- Phase 4 index refinements (Variant A "Directo") ---------- */
 .product__display { display: none; }
-.row__big { display: none; }
-@media (min-width: 720px) { .row__big { display: block; max-width: 320px; } }
 /* Compromisso: 03 as the display moment on desktop, a compact row on phones */
 .fact__aside { display: flex; justify-content: space-between; align-items: end; gap: 16px; }
 .readout--display .readout__value { font-size: clamp(56px, 12vw, 160px); }
 @media (min-width: 900px) { .fact__aside { display: grid; } }
-/* roster: readouts sit beside the thumbnail on phones, the toggle in the corner */
-.row { position: relative; }
-@media (max-width: 719.98px) {
-  .row { grid-template-columns: 80px 1fr; grid-template-areas: "thumb head" "top top" "more more"; padding: 10px; gap: 8px 12px; }
-  .row__head { padding-right: 56px; }
-  .row__toggle { position: absolute; top: 4px; right: 10px; z-index: 2; }
-}
+/* hero stats: three in one row on phones */
+@media (max-width: 719.98px) { .hero__stats .readout { padding: 2px 12px 0 10px; } .hero__stats .readout__label { font-size: 11px; letter-spacing: .1em; } }
 /* contact band */
 .footband { padding-block: var(--space-sm) 24px; }
 .contact .h2 { font-size: clamp(34px, 7vw, 88px); }
+"""
+
+
+FX = """  <!-- ambient HUD shapes: fixed layer behind the content, drift slowly and glitch (slice offsets) now and then and on scroll -->
+  <div class="fx" aria-hidden="true">
+    <span class="fx__s fx__s--frame"></span>
+    <span class="fx__s fx__s--reticle"><svg viewBox="0 0 64 64" focusable="false"><circle cx="32" cy="32" r="22"/><circle cx="32" cy="32" r="2" class="fx__dot"/><g class="fx__arms"><line x1="32" y1="0" x2="32" y2="14"/><line x1="32" y1="50" x2="32" y2="64"/><line x1="0" y1="32" x2="14" y2="32"/><line x1="50" y1="32" x2="64" y2="32"/></g></svg></span>
+    <span class="fx__s fx__s--bar"></span>
+    <span class="fx__s fx__s--bracket"></span>
+    <span class="fx__s fx__s--square"></span>
+    <span class="fx__s fx__s--cross"></span>
+  </div>
 """
 
 
@@ -729,7 +729,7 @@ def build_index():
     js = (HERE / "_base.js").read_text(encoding="utf-8").replace("Phase 4 exploration script (shared by the variants; inlined into index.html later).", "Phase 4 script.")
     body = [hero_full(), ticker(), produtos("accordion"), compromisso("02", display=True), strip(), atletas_roster(), footband()]
     nl = chr(10)
-    html = (HEAD_INDEX + css + CSS_INDEX + "  </style>" + nl + "</head>" + nl + '<body data-key="red">' + nl + nav(False) + nl + '  <main id="conteudo">' + nl
+    html = (HEAD_INDEX + css + CSS_INDEX + "  </style>" + nl + "</head>" + nl + '<body data-key="red">' + nl + nav(False) + nl + FX + nl + '  <main id="conteudo">' + nl
             + "".join(body) + "  </main>" + nl + gallery_dialog() + "  <script>" + nl + js + "  </script>" + nl + "</body>" + nl + "</html>" + nl)
     html = html.replace("../../../assets/", "assets/")
     out = HERE.parent.parent.parent / "index.html"

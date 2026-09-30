@@ -39,7 +39,7 @@
 
   <main id="conteudo">
     <section class="hero" aria-labelledby="hero-title">
-      <div class="photo hero__photo" data-parallax="0.28" data-mouse><img src="../../../assets/img/img_5512-1600.webp" srcset="../../../assets/img/img_5512-800.webp 800w, ../../../assets/img/img_5512-1600.webp 1600w" sizes="100vw" width="1600" height="1067" fetchpriority="high" alt="Pormenor de um kimono de kumite branco Shomen com cinto vermelho e luva vermelha"></div>
+      <div class="photo hero__photo" data-parallax="0.28" data-mouse data-glitch><img src="../../../assets/img/img_5512-1600.webp" srcset="../../../assets/img/img_5512-800.webp 800w, ../../../assets/img/img_5512-1600.webp 1600w" sizes="100vw" width="1600" height="1067" fetchpriority="high" alt="Pormenor de um kimono de kumite branco Shomen com cinto vermelho e luva vermelha"></div>
       <div class="hero__scrim" aria-hidden="true"></div>
       <div class="hero__glow" aria-hidden="true"></div>
       <p class="hero__vword" aria-hidden="true">Shomen</p>
@@ -55,14 +55,18 @@
             <span><span class="w" style="--i: 2">DE</span> <span class="w" style="--i: 3">AMANHÃ</span></span>
             <span><span class="w" style="--i: 4">COMEÇAM</span> <span class="w key" style="--i: 5">HOJE</span></span>
           </h1>
-          <div class="hero__foot">
-            <div class="actions" data-reveal style="--i: 4">
-              <a class="btn btn--primary" href="#produtos">Ver produtos</a>
-              <a class="btn" href="#atletas">Conhecer os atletas</a>
-            </div>
-            <div class="hero__readouts" data-reveal style="--i: 5">
-              <div class="readout readout--end readout--sm"><p class="micro readout__label">Atletas apoiados</p><p class="readout__value" data-settle>03</p></div>
-              <div class="readout readout--end"><p class="micro readout__label">Est.</p><p class="readout__value" data-settle>2025</p></div>
+          <div class="hero__foot" data-reveal style="--i: 4">
+            <hr class="rule hero__rule" aria-hidden="true">
+            <div class="hero__bar">
+              <div class="actions">
+                <a class="btn btn--primary btn--lg" href="#produtos">Ver produtos</a>
+                <a class="btn btn--lg" href="#atletas">Conhecer os atletas</a>
+              </div>
+              <ul class="hero__stats">
+                <li class="readout" style="--i: 0"><p class="micro readout__label">Atletas apoiados</p><p class="readout__value" data-settle>03</p></li>
+                <li class="readout" style="--i: 1"><p class="micro readout__label">Produtos</p><p class="readout__value" data-settle>04</p></li>
+                <li class="readout" style="--i: 2"><p class="micro readout__label">Est.</p><p class="readout__value" data-settle>2025</p></li>
+              </ul>
             </div>
           </div>
         </div>
@@ -85,7 +89,7 @@
         <ul class="tiles">
           <li class="panel panel--flush panel--hover tile" data-reveal style="--i: 0">
             <button class="tile__btn" type="button" data-product="kit" aria-expanded="false" aria-controls="prod-kit">
-              <span class="photo zoom"><img src="../../../assets/img/img_5415-800.webp" srcset="../../../assets/img/img_5415-800.webp 800w, ../../../assets/img/img_5415-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="Casaco de kimono de kumite branco Shomen com cinto vermelho, visto de frente"></span>
+              <span class="photo zoom" data-glitch><img src="../../../assets/img/img_5415-800.webp" srcset="../../../assets/img/img_5415-800.webp 800w, ../../../assets/img/img_5415-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="Casaco de kimono de kumite branco Shomen com cinto vermelho, visto de frente"></span>
               <span class="tile__body">
                 <span class="tile__ref"><span>REF. KU01</span><span class="open"><span>ABRIR</span> →</span></span>
                 <span class="tile__name">Kit Kumite Aka + Ao (2 Casacos + 1 Calça)</span>
@@ -95,7 +99,7 @@
           </li>
           <li class="panel panel--flush panel--hover tile" data-reveal style="--i: 1">
             <button class="tile__btn" type="button" data-product="cintos" aria-expanded="false" aria-controls="prod-cintos">
-              <span class="photo zoom"><img src="../../../assets/img/img_5771-800.webp" srcset="../../../assets/img/img_5771-800.webp 800w, ../../../assets/img/img_5771-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="Cintos de kumite azul e vermelho Shomen sobre um kimono branco"></span>
+              <span class="photo zoom" data-glitch><img src="../../../assets/img/img_5771-800.webp" srcset="../../../assets/img/img_5771-800.webp 800w, ../../../assets/img/img_5771-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="Cintos de kumite azul e vermelho Shomen sobre um kimono branco"></span>
               <span class="tile__body">
                 <span class="tile__ref"><span>REF. BE01</span><span class="open"><span>ABRIR</span> →</span></span>
                 <span class="tile__name">Conjunto 2 Cintos (Aka + Ao)</span>
@@ -318,7 +322,7 @@
     <section class="section section--tight" aria-label="Competição e materiais">
       <div class="wrap strip">
         <div class="panel panel--flush statement" data-reveal="left">
-          <div class="photo photo--1x1 parallax" data-parallax="0.1"><img src="../../../assets/img/img_5811-800.webp" width="800" height="1200" loading="lazy" alt="Pormenor das letras Shomen bordadas a azul na manga de um kimono branco"></div>
+          <div class="photo photo--1x1 parallax" data-parallax="0.1" data-glitch><img src="../../../assets/img/img_5811-800.webp" width="800" height="1200" loading="lazy" alt="Pormenor das letras Shomen bordadas a azul na manga de um kimono branco"></div>
           <div class="statement__body">
             <p class="micro micro--dot" data-type>Competição</p>
             <h2 class="h2--band">prontos para TODAS AS COMPETIÇÕES<br>FNK-P, OPENS nacionais e internacionais</h2>
@@ -347,47 +351,40 @@
         </div>
         <ul class="roster">
           <li class="panel panel--flush row" id="leonor-goncalves" data-key="red" data-reveal style="--i: 0">
-            <div class="photo row__thumb"><img src="../../../assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-800.webp" srcset="../../../assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-800.webp 800w, ../../../assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-1600.webp 896w" sizes="96px" width="800" height="1029" loading="lazy" alt="Leonor Gonçalves de braços cruzados, com kimono Shomen e cinto vermelho"></div>
+            <div class="photo row__thumb zoom"><img src="../../../assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-800.webp" srcset="../../../assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-800.webp 800w, ../../../assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-1600.webp 896w" sizes="(min-width: 720px) 168px, 104px" width="800" height="1029" loading="lazy" alt="Leonor Gonçalves de braços cruzados, com kimono Shomen e cinto vermelho"></div>
             <div class="row__head">
               <div class="row__idx"><p class="micro micro--dot">Atleta // <span class="mono">01</span></p><p class="micro"><span class="mono">WKF // KUMITE</span></p></div>
               <h3 class="name"><span class="name__first">Leonor</span><span class="name__last">Gonçalves</span></h3>
+              <a class="handle" href="https://www.instagram.com/leonordsgonc" rel="noopener">@leonordsgonc</a>
             </div>
-            <ul class="row__top"><li><span class="val">#1</span><span class="lab">WKF Ranking Junior <span class="mono">-53kg</span></span></li><li><span class="val">#1</span><span class="lab">WKF Ranking All Time Cadete <span class="mono">-54kg</span></span></li></ul>
-            <button class="link-btn row__toggle" type="button" aria-expanded="false" aria-controls="more-leonor-goncalves" data-toggle="more-leonor-goncalves" data-labels="+ 04|Fechar"><span>+ 04</span></button>
-            <div class="row__more">
-              <div class="more" id="more-leonor-goncalves" hidden>
-                <div>
-                  <div class="stack"><p class="micro">Palmarés completo</p><ul class="readouts"><li style="--i: 0"><span class="val">7x</span><span class="lab">Vencedora Karate1 Youth League</span></li><li style="--i: 1"><span class="val">5º</span><span class="lab">Lugar Campeonato do Mundo WKF</span></li><li style="--i: 2"><span class="val">7x</span><span class="lab">Campeã Nacional FNK-P</span></li><li style="--i: 3"><span class="val">2x</span><span class="lab">Vencedora Taça de Portugal FNK-P</span></li></ul></div>
-                  <div class="stack"><div class="photo photo--4x5 zoom row__big"><img src="../../../assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-800.webp" srcset="../../../assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-800.webp 800w, ../../../assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-1600.webp 896w" sizes="(min-width: 720px) 40vw, calc(100vw - 32px)" width="800" height="1029" loading="lazy" alt="Leonor Gonçalves de braços cruzados, com kimono Shomen e cinto vermelho"></div><a class="handle" href="https://www.instagram.com/leonordsgonc" rel="noopener">@leonordsgonc</a></div>
-                </div>
-              </div>
+            <div class="row__pal">
+              <p class="micro">Palmarés <span class="mono">// 06</span></p>
+              <ul class="palmares"><li style="--i: 0"><span class="val">#1</span><span class="lab">WKF Ranking Junior <span class="mono">-53kg</span></span></li><li style="--i: 1"><span class="val">#1</span><span class="lab">WKF Ranking All Time Cadete <span class="mono">-54kg</span></span></li><li style="--i: 2"><span class="val">7x</span><span class="lab">Vencedora Karate1 Youth League</span></li><li style="--i: 3"><span class="val">5º</span><span class="lab">Lugar Campeonato do Mundo WKF</span></li><li style="--i: 4"><span class="val">7x</span><span class="lab">Campeã Nacional FNK-P</span></li><li style="--i: 5"><span class="val">2x</span><span class="lab">Vencedora Taça de Portugal FNK-P</span></li></ul>
             </div>
           </li>
           <li class="panel panel--flush row" id="andre-aguiar" data-key="blue" data-reveal style="--i: 1">
-            <div class="photo row__thumb"><img class="pos-top" src="../../../assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-800.webp" srcset="../../../assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-800.webp 800w, ../../../assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-1600.webp 896w" sizes="96px" width="800" height="1429" loading="lazy" alt="André Aguiar de fato azul a segurar um troféu"></div>
+            <div class="photo row__thumb zoom"><img class="pos-top" src="../../../assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-800.webp" srcset="../../../assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-800.webp 800w, ../../../assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-1600.webp 896w" sizes="(min-width: 720px) 168px, 104px" width="800" height="1429" loading="lazy" alt="André Aguiar de fato azul a segurar um troféu"></div>
             <div class="row__head">
               <div class="row__idx"><p class="micro micro--dot">Atleta // <span class="mono">02</span></p><p class="micro"><span class="mono">WKF // KUMITE</span></p></div>
               <h3 class="name"><span class="name__first">André</span><span class="name__last">Aguiar</span></h3>
+              <!-- TODO: confirm André's Instagram handle (_aguiar05._ on the old site vs aguiar05. in the brief) --><a class="handle" href="https://www.instagram.com/_aguiar05._/" rel="noopener">@_aguiar05._</a>
             </div>
-            <ul class="row__top"><li><span class="val"></span><span class="lab">Vencedor Karate1 Youth League Guadalajara <span class="mono">2025</span> Cadete <span class="mono">+70kg</span></span></li><li><span class="val"></span><span class="lab">Medalhista Karate1 Youth League Monterrey <span class="mono">2025</span> Junior <span class="mono">+76kg</span></span></li></ul>
-            <button class="link-btn row__toggle" type="button" aria-expanded="false" aria-controls="more-andre-aguiar" data-toggle="more-andre-aguiar" data-labels="+ 03|Fechar"><span>+ 03</span></button>
-            <div class="row__more">
-              <div class="more" id="more-andre-aguiar" hidden>
-                <div>
-                  <div class="stack"><p class="micro">Palmarés completo</p><ul class="readouts"><li style="--i: 0"><span class="val"></span><span class="lab">Campeão Nacional FNK-P</span></li><li style="--i: 1"><span class="val">2x</span><span class="lab">Vencedor da Taça de Portugal FNK-P</span></li><li style="--i: 2"><span class="val"></span><span class="lab">Vencedor Taça da Liga FNK-P</span></li></ul></div>
-                  <div class="stack"><div class="photo photo--4x5 zoom row__big"><img class="pos-top" src="../../../assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-800.webp" srcset="../../../assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-800.webp 800w, ../../../assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-1600.webp 896w" sizes="(min-width: 720px) 40vw, calc(100vw - 32px)" width="800" height="1429" loading="lazy" alt="André Aguiar de fato azul a segurar um troféu"></div><!-- TODO: confirm André's Instagram handle (_aguiar05._ on the old site vs aguiar05. in the brief) --><a class="handle" href="https://www.instagram.com/_aguiar05._/" rel="noopener">@_aguiar05._</a></div>
-                </div>
-              </div>
+            <div class="row__pal">
+              <p class="micro">Palmarés <span class="mono">// 05</span></p>
+              <ul class="palmares"><li style="--i: 0"><span class="val"></span><span class="lab">Vencedor Karate1 Youth League Guadalajara <span class="mono">2025</span> Cadete <span class="mono">+70kg</span></span></li><li style="--i: 1"><span class="val"></span><span class="lab">Medalhista Karate1 Youth League Monterrey <span class="mono">2025</span> Junior <span class="mono">+76kg</span></span></li><li style="--i: 2"><span class="val"></span><span class="lab">Campeão Nacional FNK-P</span></li><li style="--i: 3"><span class="val">2x</span><span class="lab">Vencedor da Taça de Portugal FNK-P</span></li><li style="--i: 4"><span class="val"></span><span class="lab">Vencedor Taça da Liga FNK-P</span></li></ul>
             </div>
           </li>
           <li class="panel panel--flush row" id="martim-sa" data-key="red" data-reveal style="--i: 2">
-            <div class="photo row__thumb"><img class="pos-top" src="../../../assets/img/whatsapp-image-2025-10-29-at-08.45.16_3fd8c6dc-800.webp" srcset="../../../assets/img/whatsapp-image-2025-10-29-at-08.45.16_3fd8c6dc-800.webp 800w, ../../../assets/img/whatsapp-image-2025-10-29-at-08.45.16_3fd8c6dc-1600.webp 1200w" sizes="96px" width="800" height="1067" loading="lazy" alt="Martim Sá em cima do tatami, com o corta-vento Shomen e o punho levantado"></div>
+            <div class="photo row__thumb zoom"><img class="pos-top" src="../../../assets/img/whatsapp-image-2025-10-29-at-08.45.16_3fd8c6dc-800.webp" srcset="../../../assets/img/whatsapp-image-2025-10-29-at-08.45.16_3fd8c6dc-800.webp 800w, ../../../assets/img/whatsapp-image-2025-10-29-at-08.45.16_3fd8c6dc-1600.webp 1200w" sizes="(min-width: 720px) 168px, 104px" width="800" height="1067" loading="lazy" alt="Martim Sá em cima do tatami, com o corta-vento Shomen e o punho levantado"></div>
             <div class="row__head">
               <div class="row__idx"><p class="micro micro--dot">Atleta // <span class="mono">03</span></p></div>
               <h3 class="name"><span class="name__first">Martim</span><span class="name__last">Sá</span></h3>
+              <!-- TODO: Martim's Instagram (the old site linked Leonor's profile here by mistake) -->
             </div>
-            <ul class="row__top"><li><span class="val">5º</span><span class="lab">Lugar Open Lisboa <span class="mono">2025</span></span></li></ul>
-            
+            <div class="row__pal">
+              <p class="micro">Palmarés <span class="mono">// 01</span></p>
+              <ul class="palmares"><li style="--i: 0"><span class="val">5º</span><span class="lab">Lugar Open Lisboa <span class="mono">2025</span></span></li></ul>
+            </div>
           </li>
         </ul>
       </div>

@@ -47,7 +47,7 @@ def motion(page, width):
     py = page.evaluate("document.querySelector('.hero__photo').style.getPropertyValue('--py')")
     check(f"{width}: hero parallax active ({'scroll-driven CSS' if sda else 'JS fallback'})", hero_t != "none" and (sda or py != ""), f"transform={hero_t[:40]} --py={py}")
     check(f"{width}: progress bar moves", page.evaluate("document.querySelector('.progress').style.transform") not in ("", "scaleX(0)"))
-    check(f"{width}: readouts settled to the real value", page.evaluate("[...document.querySelectorAll('[data-settle]')].map(e => e.textContent).join(',')") == "03,2025,03")
+    check(f"{width}: readouts settled to the real value", page.evaluate("[...document.querySelectorAll('[data-settle]')].map(e => e.textContent).join(',')") == "03,04,2025,03")
     check(f"{width}: type-on finished (no cursor left)", page.evaluate("document.querySelectorAll('[data-type].is-typing').length") == 0)
     # scroll spy
     page.evaluate("document.getElementById('atletas').scrollIntoView()")
@@ -91,9 +91,11 @@ def motion(page, width):
     page.locator("[data-toggle='compromisso-more']").click()
     page.wait_for_timeout(700)
     check(f"{width}: ler mais reveals the rest of Compromisso", page.evaluate("document.getElementById('compromisso-more').getBoundingClientRect().height") > 60)
-    page.locator("[data-toggle='more-leonor-goncalves']").click()
-    page.wait_for_timeout(700)
-    check(f"{width}: + n reveals the rest of the palmarés", page.evaluate("document.getElementById('more-leonor-goncalves').getBoundingClientRect().height") > 60)
+    check(f"{width}: full palmarés visible (12 results)", page.evaluate("[...document.querySelectorAll('.palmares li')].filter(l => l.offsetParent && getComputedStyle(l).opacity === '1').length") == 12)
+    check(f"{width}: glitch layers present on photos without faces", page.evaluate("document.querySelectorAll('.photo[data-glitch] .glitch').length") == 8)
+    page.evaluate("window.scrollBy(0, 120)")
+    page.wait_for_timeout(100)
+    check(f"{width}: HUD shapes burst while scrolling", page.evaluate("document.querySelector('.fx').classList.contains('is-scrolling')"))
     # mobile menu
     if width < 720:
         page.locator(".nav__toggle").click()
@@ -117,7 +119,7 @@ def reduced(page, width):
         if (e.classList.contains('rule--key') && cs.transform !== 'none' && cs.transform !== 'matrix(1, 0, 0, 1, 0, 0)') bad.push('rule');
       });
       const anim = [];
-      document.querySelectorAll('.ticker__track, .hero__vword, .hero__ruler, .hero__glow, .reticle__arms, .hero__photo img').forEach(e => {
+      document.querySelectorAll('.ticker__track, .hero__vword, .hero__ruler, .hero__glow, .reticle__arms, .hero__photo img, .fx__s').forEach(e => {
         if (getComputedStyle(e).animationName !== 'none') anim.push(e.className || e.tagName);
       });
       return { bad, anim, sda: document.documentElement.classList.contains('sda') };
@@ -125,6 +127,7 @@ def reduced(page, width):
     check(f"{width} reduce: all revealed, no transforms", len(res["bad"]) == 0, ",".join(res["bad"][:5]))
     check(f"{width} reduce: no ambient animations", len(res["anim"]) == 0, ",".join(res["anim"][:5]))
     check(f"{width} reduce: scroll-driven class off", not res["sda"])
+    check(f"{width} reduce: no glitch layers", page.evaluate("document.querySelectorAll('.glitch').length") == 0)
     print(f"{width} reduce: page height {page.evaluate('document.body.scrollHeight')}px")
     page.locator(".tile__btn").first.click()
     page.wait_for_timeout(200)

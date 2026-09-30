@@ -20,4 +20,5 @@ Same content (verbatim from Phase 3), same visual system, three different skelet
 
 - Products first, closed accordion, roster athletes, contact in the footer band: shortest path from hero to contact, nothing behind gestures.
 - Trims still needed to get under the targets: Compromisso panel (546 → ~430 px at 390) by dropping the aside stack on mobile, roster rows (1 044 → ~850 px) by putting the two readouts beside the name at 390, contact band (718 → ~560 px) with the heading at the 88 px scale instead of 96 and less top padding. Strip stays.
+- Iteration 2 after Pedro's review (same day): the roster shows the full palmarés as a grid of readout cells (no "+ n"), the hero ends in a stats bar with three numbers, and a fixed layer of HUD shapes plus the photos without faces get a slice glitch. Heights went to 5 060 / 4 346 px.
 - Motion: everything in `_base.css`/`_base.js` (type-on labels, tick flash, sliding nav dot, scroll-driven hero, view()-timeline drift on the small photos, `ler mais` / `+ n` grid-rows reveals, gallery dialog fallback) carries over unchanged into the single file.
