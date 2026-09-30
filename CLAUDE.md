@@ -6,12 +6,22 @@ Static site, **one file**: `index.html` at the repo root contains all markup, CS
 
 - **Phase 1** (content + basic dark layout) → `archive/phase-1/`
 - **Phase 2** (HUD brand system, multi-page) → `archive/phase-2/`
-- **Phase 3** (this): single self-contained `index.html`, red + blue only, products as modals, more motion.
+- **Phase 3** (single self-contained `index.html`, red + blue only, products as modals) → `archive/phase-3/`
+- **Phase 4** (this, branch `phase-4-onepager`): truly one page, more compact, more motion. Products open **inline** in an expanding sheet under the tiles, Compromisso folds behind "Ler mais", the two bands became one statement strip, athletes are a roster with "+ n", contact lives in the footer band. Layout is **Variant A "Directo"** of `docs/explorations/phase-4/` (products before Compromisso, full-bleed hero, accordion sheet, roster, top bar): chosen because it is the shortest path from hero to contact with nothing hidden behind a horizontal gesture. See the README there for the other two variants and the verdicts.
 - **Before starting any new phase**, copy everything in the repo (except `.git` and the contents of `archive/`) into a new versioned folder `archive/phase-N/` and commit that snapshot first. Pedro's rule, no exceptions.
+
+## Compactness targets (Phase 4)
+
+| | Phase 3 | Phase 4 | target |
+|---|---|---|---|
+| 390 px (844 px viewport) | 10 802 px · 12.8 vh | **4 412 px · 5.2 vh** | ≤ 5.5 vh |
+| 1280 px (800 px viewport) | 7 813 px · 9.8 vh | **3 985 px · 5.0 vh** | ≤ 5 vh |
+
+Measured with `document.body.scrollHeight`, sheet closed, `prefers-reduced-motion: reduce`. Hero ≤ 92 vh; the first product tile is on screen on scroll one at both widths. Keep it that way: anything added to the top of the page pushes the products down.
 
 ## Shipping a new version
 
-Edit `index.html` and swap it at the repo root; nothing else has to change unless new photos are added. Two helper scripts:
+Edit `index.html` and swap it at the repo root; nothing else has to change unless new photos are added. Helper scripts:
 
 ```bash
 python tools/optimise-images.py      # new photos in assets/img/originals/ → 1600w/800w WebP
@@ -20,20 +30,25 @@ python tools/inline-assets.py        # re-embed fonts/grain if you edited index.
 
 `inline-assets.py` is idempotent: it only touches `url("assets/fonts/…")` / `url("assets/img/grain.png")` references, so you can author with file paths and inline before committing. The committed `index.html` must have zero `url("assets/` references (check with a grep).
 
+`docs/explorations/phase-4/_build.py` assembled the three exploration variants and the **first cut** of the Phase 4 `index.html` (`--index`). `index.html` is the source of truth now: edit it directly and do not re-run `--index`, it would overwrite later hand edits.
+
 ## File map
 
 ```
-index.html                 The site. Sections in order: nav, hero, ticker, Compromisso, Produtos (tiles → <dialog>), bands, Atletas, Contacto, footer, then the four product <dialog>s, then the <script>.
+index.html                 The site. Sections in order: nav, hero, ticker, Produtos (tiles → inline .sheet with the four .product panels), Compromisso (panel, "Ler mais"), statement strip, Atletas (roster), footer band with Contacto, then the gallery <dialog>, then the <script>.
 assets/fonts/              Tomorrow-Light/Regular/Black.woff2, GeistMono-Regular/Bold.woff2 (+ OFL licences). Source for inline-assets.py.
 assets/img/grain.png       200×200 greyscale noise. Source for inline-assets.py.
 assets/img/originals/      Full-resolution photos and logo PNGs (never edit, never mirror)
 assets/img/*-1600.webp, *-800.webp   Generated renditions
 assets/img/SOURCES.md      Where every original came from
-docs/screenshots/phase-3/  Review screenshots (390 + 1280)
+docs/explorations/phase-4/ The three skeleton variants (_build.py + _base.css/_base.js → variant-a/b/c.html) and README with verdicts
+docs/screenshots/phase-4/  Review screenshots (390 + 1280, closed and with the sheet / reveals open) + explorations/
 docs/scrape/*.json         Raw JSON of the old Squarespace site
+docs/PR-phase-4.md         PR description (variants, heights, motion inventory, veto list, tone-down candidates)
 tools/inline-assets.py     Embeds fonts + grain into index.html
 tools/optimise-images.py   WebP renditions
 tools/screenshots.py       Full-page screenshots + overflow/console check (Playwright)
+tools/motion-test.py       Headless behaviour test: reveals, parallax, keyboard open/close, scroll-spy, menu, reduced motion
 archive/                   Frozen phases
 CNAME, .nojekyll, robots.txt, sitemap.xml, favicon.ico, apple-touch-icon.png
 ```
@@ -46,43 +61,72 @@ CNAME, .nojekyll, robots.txt, sitemap.xml, favicon.ico, apple-touch-icon.png
 --red:#FF2A50; --blue:#54C8FF;
 --line:rgba(245,246,248,.12); --tick:rgba(245,246,248,.4);
 --key: var(--red); --alt: var(--blue);   /* [data-key="blue"] swaps them */
+--fs-hero: clamp(48px, 9vw, 140px)  /* line-height 1.05 */
+--fs-h2: clamp(40px, 7vw, 88px)     /* line-height 1.04, section titles */
+--fs-h2-band: clamp(26px, 3.6vw, 44px)   /* Compromisso heading; the strip uses clamp(20px, 2.4vw, 30px) */
+--fs-display: clamp(96px, 16vw, 220px)   /* the one display moment: "03" in Compromisso (capped at 160px there) */
+--fs-body: 17px; --fs-micro: 13px
+--space: clamp(48px, 6vw, 80px); --space-sm: clamp(24px, 4vw, 48px); --gap: 16px; --nav-h: 60px
 ```
 
-**Highlights are red and blue only.** No green, no yellow, no other accent. Type: Tomorrow 300 Light + 900 Black (400 Regular only over photos), Geist Mono for numbers and codes, uppercase labels/headings. Hero `h1` is capped at `6.4vw` with `line-height 1.08` so lines never touch; `h2--band` is the 52px scale for long sentences.
+**Highlights are red and blue only.** No green, no yellow, no other accent. Type: Tomorrow 300 Light + 900 Black (400 Regular only over photos), Geist Mono for numbers and codes, uppercase labels/headings. Headings with a hyphen (`Equipa-te`, `CONTACTa-NOS`) are wrapped in `.nobr` so they never break at the hyphen. One display moment per viewport: hero `h1`, the `03`, the athletes title, `CONTACTa-NOS`; everything else stays small.
 
 | Where | `data-key` |
 |---|---|
-| `<body>`, hero, Compromisso, bands, Contacto | red |
-| `#produtos` section and every product `<dialog>` | blue |
-| Athlete panels | Leonor red, André blue, Martim red, Guilherme blue, Santiago red (alternate) |
+| `<body>`, hero, Compromisso, strip, footer band | red |
+| `#produtos` section (tiles, sheet) and the gallery `<dialog>` | blue |
+| Roster rows | Leonor red, André blue, Martim red, Guilherme blue, Santiago red (alternate) |
 
-`--dim` fails contrast on `--bg` (2.3:1): graphics only, never text.
+`--dim` fails contrast on `--bg` (2.3:1): graphics only, never text. Key colour covers ≤ 4 % of any viewport (measured); keep it under 10 %.
 
-## Motion inventory (all in the `<script>` and the "motion" CSS block)
+## Motion inventory (Phase 4)
 
-- Load: hero words rise in sequence; nav bar, hero micro-labels, buttons and readouts stagger in (`--i`).
-- Scroll: every `[data-reveal]` fades/rises once (IntersectionObserver); `.rule--key` grows; `.readouts li` cascade; readout digits "settle" from random digits (`[data-settle]`).
-- Parallax: hero photo (scroll factor .28 + mouse tilt on pointer devices), band and athlete photos (`data-parallax` factor relative to viewport centre). Images are scaled 1.14 inside `overflow:hidden` wrappers so no edges show.
-- Ambient: ticker strip (48s loop, pauses on hover), vertical `SHOMEN` word drifts, hero ruler scrolls, reticle arms rotate.
-- Hover: buttons fill with a left-to-right white sweep; tiles zoom the photo, turn the corner ticks and title to the key colour and reveal `ABRIR →`; chips and thumbnails highlight.
-- Nav: scroll progress line at the top, key dot follows the section in view (scroll spy), overlay menu items rise in.
-- Modals: fade/rise in with a blurred dark backdrop; thumbnails crossfade the main image; backdrop click, `Fechar` and Esc close; `#p-kit` etc. deep-link opens the product.
-- `prefers-reduced-motion` disables all of the above (modals still work, without animation).
+Everything lives in the "motion" CSS block and the `<script>`. `html.js` gates the hidden-before-reveal states, `html.sda` is added when `CSS.supports("animation-timeline: scroll()")` and motion is not reduced. **`prefers-reduced-motion: reduce` turns all of it off**: everything visible, no transforms, no ambient loops, transitions off; the sheet, "Ler mais", "+ n", menu and gallery still work, instantly. Nothing bounces, nothing loops faster than 4 s, no counters count up, no cursor followers.
 
-Still banned: glitch, VHS, scanlines, chromatic aberration, matrix rain, anything that distorts text, the logo or a face. Photos: brightness/saturation filter on the hero for legibility is allowed; no duotone, no mirroring.
+| Motion | Trigger | Duration / easing | Reduced |
+|---|---|---|---|
+| Hero words rise (`.hero__title .w`) | load (+40 ms) | .7 s ease-out, 60 ms stagger | static |
+| Nav bar, hero micro-labels, buttons, readouts stagger in | load, `--i` | .6 s ease-out, `--i` × 80 ms | static |
+| Micro-labels **type on** (`[data-type]`, mono `_` cursor, no blink) | reveal | ≤ 600 ms (22 ms/char), label keeps its final width | off |
+| Readout digits **settle** (`[data-settle]`) | reveal / sheet open | 700 ms random digits → value | off |
+| `[data-reveal]` fade + rise 14 px; section heads slide 28 px from their side (`data-reveal="left"`) | IntersectionObserver, once, threshold .12 | .6 s ease-out | static |
+| `.rule--key` grows | reveal | .7 s ease-out, .25 s delay | static |
+| `.readouts li` cascade | reveal / "+ n" | .45 s, 60 ms stagger | static |
+| Panel **tick flash** (`.is-flash`) | reveal, sheet open | 150 ms, 60 ms stagger | off |
+| Hero photo **parallax + slow zoom** | `animation-timeline: scroll(root)`, 0–100 vh: translateY 0→28 vh, scale 1.14→1.24 | linear with scroll | `scale(1.02)` static |
+| Hero mouse tilt (`--mx/--my`) | pointer devices | direct | off |
+| Statement + roster thumbnails drift | `animation-timeline: view()`, entry→exit, translateY 6 %→−6 % | linear with scroll | static |
+| JS parallax fallback (`--py`, `data-parallax`) | scroll, only when `html.sda` is absent | rAF | off |
+| Progress line | scroll | direct | kept (state, not motion) |
+| Nav key dot **slides** between items (`.nav__dot`) | scroll-spy (IO, −40 %/−55 % margins) | .45 s ease-out | jumps |
+| Ticker strip | ambient | 48 s linear loop, pauses on hover | off |
+| Vertical `SHOMEN` drift | ambient | 9 s ease-in-out | off |
+| Hero ruler | ambient | 4 s linear | off |
+| Reticle arms | ambient | 24 s linear | off |
+| Hero key-colour **glow** (`.hero__glow`, radial) | ambient | 8 s ease-in-out, opacity .12→.22 | static .12 |
+| Tile hover: photo zoom 1.05, ticks + name key colour, `ABRIR →` slides in | hover / focus | .8 s / .25–.4 s / .3 s | off |
+| Active tile grows (`.tile.is-active`) | sheet open | scale 1.02, .5 s ease-out | off |
+| Sheet open/close (`.sheet` grid rows 0fr↔1fr) | tile click, Enter/Space, Fechar, Esc | .55 s ease-out | instant |
+| "Ler mais" / "+ n" (`.more`) | click | .5 s grid rows + .4 s opacity, `+` rotates 45° | instant |
+| Thumbnail crossfade | click | 200 ms out, swap, .3 s in | instant |
+| Buttons sweep, chips, thumbs lift, links | hover | .4 s / .25 s | off |
+| Menu overlay + items rise | toggle (< 720 px) | .3 s / .5 s, 70 ms stagger | off |
+| Gallery dialog + backdrop | "Ver galeria completa" | .45 s / .3 s | off |
+
+Still banned: glitch, VHS, scanlines, chromatic aberration, matrix rain, anything that distorts text, the logo or a face, duotones, mirrored photos, `border-radius`. Photos: brightness/saturation filter on the hero for legibility is allowed.
 
 ## How to add or edit a product
 
 1. Photos into `assets/img/originals/`, run `python tools/optimise-images.py`.
-2. Copy a `<li class="panel panel--flush panel--hover tile">` in `#produtos` (photo, `REF.`, name, one-line excerpt, `data-dialog="p-<id>"` + `href="#p-<id>"`).
-3. Copy a `<dialog class="modal" id="p-<id>" data-key="blue">` block: header (`PRODUTO // NN`, `REF.`), main photo + thumbnail buttons (`data-src` 1600w, `data-full` original, `data-alt`), name, description (verbatim), `.spec` readouts (`MATERIAL`, `APROVAÇÃO`, `TECIDO` only when the copy has that line), `TAMANHOS` chips, mailto button with the product in the subject.
-4. Update `04 // KU01 · …` in the section head. No prices, no cart, ever.
+2. Copy a `<li class="panel panel--flush panel--hover tile">` in `#produtos`. Inside it a `<button class="tile__btn" data-product="<id>" aria-expanded="false" aria-controls="prod-<id>">` with the photo, `REF.`, name and one-line excerpt as **spans** (a button only takes phrasing content).
+3. Copy an `<article class="panel product" id="prod-<id>" data-id="<id>" hidden>` block inside `.sheet__inner`: header (`PRODUTO // NN`, `REF.`, `Fechar` with `data-close-product`), main photo (`data-main`, link `data-main-link` to the original) + `ul.thumbs.thumbs--short` buttons (`data-src` 1600w, `data-full` original, `data-alt`; the first six show, the rest are reached through `Ver galeria completa` with `data-gallery`, so only add that button when there are more than six), name, description (verbatim), `.spec` readouts (`MATERIAL`, `APROVAÇÃO`, `TECIDO` only when the copy has that line), `TAMANHOS` chips, mailto button with the product in the subject.
+4. Update `04 // KU01 · …` in the section head. `#p-<id>` deep-links open the sheet on load. No prices, no cart, ever.
 
 ## How to add or edit an athlete
 
 1. Photo into `assets/img/originals/`, run the optimiser.
-2. Copy an `<article class="panel panel--flush athlete">` in `#atletas` (or uncomment the Guilherme / Santiago skeletons). Set `data-key` (next in red/blue rotation), add `athlete--flip` if the previous panel had the image on the left, fill photo (`alt` pt-PT, `pos-top` if the head is near the top), `ATLETA // NN`, name (`.name__first` Light / `.name__last` Black), achievements as `<li style="--i: n"><span class="val">7x</span><span class="lab">…</span></li>` (empty `.val` when the line has no leading numeral; weights/years wrapped in `.mono`), `@handle` (omit rather than guess).
-3. Update the counters: `ATLETAS // NN` and every `ATLETAS APOIADOS` readout (hero + Compromisso). Count only live panels.
+2. Copy an `<li class="panel panel--flush row">` in `#atletas`. Set `id`, `data-key` (next in the red/blue rotation), the thumbnail (`alt` pt-PT, `pos-top` if the head is near the top), `ATLETA // NN`, the name (`.name__first` Light / `.name__last` Black), the **two** headline results in `ul.row__top`, the `+ NN` toggle (`data-toggle="more-<id>"`, `data-labels="+ NN|Fechar"`; use `Ver|Fechar` when there is nothing beyond the two results but there is a handle), and in `.row__more .more` the remaining results as `<li style="--i: n"><span class="val">7x</span><span class="lab">…</span></li>` (empty `.val` when the line has no leading numeral; weights/years wrapped in `.mono`), the 4:5 photo (`.row__big`) and `@handle` (omit rather than guess).
+3. Update the counters: `ATLETAS // NN` and every `ATLETAS APOIADOS` readout (hero + Compromisso). Count only live rows. Guilherme and Santiago Gonçalves are still pending photo + achievements (see TODOs).
 
 ## Content rules (short version)
 
@@ -97,14 +141,17 @@ Still banned: glitch, VHS, scanlines, chromatic aberration, matrix rain, anythin
 
 - Compromisso copy is a Phase 3 draft for Pedro's review.
 - "Ultra Level" in the Corta Vento description is probably "Ultra Leve".
-- Martim Sá's Instagram is missing; André Aguiar's handle differs between the old site (`_aguiar05._`) and the rebuild brief (`aguiar05.`); Guilherme and Santiago Gonçalves panels are commented out pending photo + achievements.
+- Martim Sá's Instagram is missing; André Aguiar's handle differs between the old site (`_aguiar05._`) and the rebuild brief (`aguiar05.`); Guilherme and Santiago Gonçalves rows are not in the page yet (photo + achievements pending; the Phase 3 skeletons are in `archive/phase-3/index.html`).
 
 ## Checks before pushing
 
 ```bash
 python -m http.server 8000
-python tools/screenshots.py http://localhost:8000 docs/screenshots/phase-3 index
+python tools/screenshots.py http://localhost:8000 docs/screenshots/phase-4 index   # 0 px overflow, 0 console errors
+python tools/motion-test.py http://localhost:8000                                   # 0 failures, prints page heights
 grep -c 'url("assets/' index.html        # must be 0
-grep -n "green\|yellow\|glitch\|scanline" index.html   # must be empty
-grep -rn "squarespace\|€\|Carrinho\|Reservar\|cart" index.html   # must be empty
+grep -n "green\|yellow\|glitch\|scanline\|border-radius" index.html   # only border-radius: 0
+grep -rin "squarespace\|€\|Carrinho\|Reservar\|cart\|prémio" index.html   # must be empty
 ```
+
+Nu validator: `curl -s -H "Content-Type: text/html; charset=utf-8" --data-binary @index.html "https://validator.w3.org/nu/?out=json"` → 0 errors (four `role="list"` warnings are expected, they keep list semantics in Safari). Lighthouse: run Chromium with `--remote-debugging-port=9222` and `npx lighthouse http://localhost:8000/index.html --port=9222 --only-categories=accessibility` (chrome-launcher cannot spawn here); Phase 4 scores 100.
