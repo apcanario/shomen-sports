@@ -1,6 +1,6 @@
 # Shomen Sports website
 
-Static, self-contained site for [Shōmen Sports](https://www.shomen-sports.com/), a Portuguese karate brand: three pages (Início, Produtos, Atletas), plain HTML/CSS/JS, no build step, no external requests at runtime. It replaces the previous Squarespace site and drops the online store: products are presented without prices, and the only purchase path is contact by email or Instagram. Maintenance notes live in [CLAUDE.md](CLAUDE.md).
+Static, self-contained site for [Shōmen Sports](https://www.shomen-sports.com/), a Portuguese karate brand: three pages (Início, Produtos, Atletas), plain HTML/CSS/JS, no build step, no external requests at runtime. It replaces the previous Squarespace site and drops the online store: products are presented without prices, and the only purchase path is contact by email or Instagram. Phase 2 restyled it with the brand's HUD visual system (Tomorrow + Geist Mono, self-hosted). Maintenance notes, tokens and rules live in [CLAUDE.md](CLAUDE.md); each finished phase is frozen under `archive/`.
 
 ## Preview locally
 
