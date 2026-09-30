@@ -10,7 +10,15 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var sda = typeof CSS !== 'undefined' && CSS.supports && CSS.supports('animation-timeline: scroll()');
-  if (sda && !reduce) { root.classList.add('sda'); }
+  if (sda && !reduce) {
+    root.classList.add('sda');
+    /* scroll-driven animations (Chromium, Safari 26+): hero parallax + slow zoom on the root scroll,
+       the small statement/roster photos drift as they cross the viewport. Older browsers keep the JS parallax. */
+    var st = document.createElement('style');
+    st.textContent = 'html.sda .hero__photo img{animation:heroScroll linear both;animation-timeline:scroll(root);animation-range:0 100vh}' +
+      'html.sda .statement .photo img,html.sda .row__thumb img{animation:viewDrift linear both;animation-timeline:view();animation-range:entry 0% exit 100%}';
+    document.head.appendChild(st);
+  }
 
   /* ---------- navigation ---------- */
   var toggle = document.querySelector('.nav__toggle');

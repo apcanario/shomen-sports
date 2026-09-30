@@ -248,9 +248,10 @@ img.pos-20 { object-position: 50% 20%; }
 @media (min-width: 720px) { .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .tile { display: flex; flex-direction: column; }
 .tile__btn { display: flex; flex-direction: column; height: 100%; width: 100%; padding: 0; border: 0; background: none; color: inherit; text-align: left; cursor: pointer; font: inherit; }
-.tile .photo { aspect-ratio: 1; }
+.tile .photo { display: block; aspect-ratio: 1; }
 .tile__body { padding: 12px 12px 14px; display: grid; gap: 6px; align-content: start; }
-.tile__name { font-size: clamp(14px, 1.4vw, 17px); font-weight: 900; text-transform: uppercase; line-height: 1.1; letter-spacing: -.005em; margin: 0; transition: color .25s var(--ease); text-wrap: pretty; }
+.tile__name, .tile__ref { display: block; }
+.tile__name { font-size: clamp(14px, 1.4vw, 17px); font-weight: 900; text-transform: uppercase; line-height: 1.1; letter-spacing: -.005em; margin: 0; transition: color .25s var(--ease); text-wrap: pretty; overflow-wrap: normal; }
 .tile__ref { font-family: var(--font-mono); font-size: 12px; color: var(--grey); display: flex; justify-content: space-between; gap: 8px; }
 .tile__ref .open { color: var(--key); opacity: 0; transform: translateX(-6px); transition: opacity .3s var(--ease), transform .3s var(--ease-out); }
 .tile__btn:hover .open, .tile__btn:focus-visible .open, .tile__btn[aria-expanded="true"] .open { opacity: 1; transform: none; }
@@ -370,12 +371,10 @@ html.js .hero.is-in .hero__title .w { opacity: 1; transform: none; transition: o
 html.js .readouts li { opacity: 0; transform: translateX(-8px); }
 html.js .is-in .readouts li, html.js .more.is-open .readouts li { opacity: 1; transform: none; transition: opacity .45s var(--ease-out), transform .45s var(--ease-out); transition-delay: calc(120ms + var(--i, 0) * 60ms); }
 /* type-on micro-labels: JS reveals the characters, this draws the cursor */
-[data-type].is-typing::after { content: "_"; font-family: var(--font-mono); color: var(--key); animation: blink .6s steps(1) infinite; }
-/* scroll-driven where supported: hero photo parallax + slow zoom */
-@supports (animation-timeline: scroll()) {
-  html.js.sda .hero__photo img { animation: heroScroll linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
-  html.js.sda .statement .photo img, html.js.sda .row__thumb img { animation: viewDrift linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
-}
+[data-type].is-typing::after { content: "_"; font-family: var(--font-mono); color: var(--key); }
+/* scroll-driven where supported (hero photo parallax + slow zoom, small photos drift with view()):
+   the animation-timeline / animation-range declarations are added by the script when
+   CSS.supports("animation-timeline: scroll()") is true, so this stylesheet stays validator-clean. */
 @keyframes heroScroll { from { transform: translate3d(calc(var(--mx, 0) * 1px), calc(var(--my, 0) * 1px), 0) scale(1.14); } to { transform: translate3d(calc(var(--mx, 0) * 1px), calc(28vh + var(--my, 0) * 1px), 0) scale(1.24); } }
 @keyframes viewDrift { from { transform: translateY(6%) scale(1.14); } to { transform: translateY(-6%) scale(1.14); } }
 @keyframes fadeIn { from { opacity: 0; } }
@@ -386,11 +385,9 @@ html.js .is-in .readouts li, html.js .more.is-open .readouts li { opacity: 1; tr
 @keyframes rulerScroll { to { background-position: 0 40px; } }
 @keyframes ticker { to { transform: translateX(-50%); } }
 @keyframes glow { 0%, 100% { opacity: .12; transform: scale(1); } 50% { opacity: .22; transform: scale(1.08); } }
-@keyframes blink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
   html.js [data-reveal], html.js .hero__title .w, html.js .readouts li, html.js [data-reveal] .rule--key { opacity: 1; transform: none; transition: none; }
-  .ticker__track, .hero__vword, .hero__ruler, .hero__glow, .reticle .reticle__arms, .modal[open], .modal::backdrop, .nav__menu.is-open .nav__link, [data-type].is-typing::after { animation: none; }
-  html.js.sda .hero__photo img, html.js.sda .statement .photo img, html.js.sda .row__thumb img { animation: none; }
+  .ticker__track, .hero__vword, .hero__ruler, .hero__glow, .reticle .reticle__arms, .modal[open], .modal::backdrop, .nav__menu.is-open .nav__link { animation: none; }
   .btn, .thumbs button, .chip, .zoom img, .panel, .panel::before, .tile, .tile__name, .tile__ref .open, .nav__dot, .sheet, .more, .link-btn::after { transition: none; }
   .parallax img, .hero__photo img { transform: scale(1.02); }
   .tile.is-active { transform: none; }
@@ -489,42 +486,42 @@ html.js .is-in .readouts li, html.js .more.is-open .readouts li { opacity: 1; tr
         <ul class="tiles">
           <li class="panel panel--flush panel--hover tile" data-reveal style="--i: 0">
             <button class="tile__btn" type="button" data-product="kit" aria-expanded="false" aria-controls="prod-kit">
-              <div class="photo zoom"><img src="assets/img/img_5415-800.webp" srcset="assets/img/img_5415-800.webp 800w, assets/img/img_5415-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="Casaco de kimono de kumite branco Shomen com cinto vermelho, visto de frente"></div>
-              <div class="tile__body">
-                <p class="tile__ref"><span>REF. KU01</span><span class="open"><span>ABRIR</span> →</span></p>
-                <h3 class="tile__name">Kit Kumite Aka + Ao (2 Casacos + 1 Calça)</h3>
-                <p class="tile__excerpt">Kit Kimono de Competição Kumite (Aka + Ao).</p>
-              </div>
+              <span class="photo zoom"><img src="assets/img/img_5415-800.webp" srcset="assets/img/img_5415-800.webp 800w, assets/img/img_5415-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="Casaco de kimono de kumite branco Shomen com cinto vermelho, visto de frente"></span>
+              <span class="tile__body">
+                <span class="tile__ref"><span>REF. KU01</span><span class="open"><span>ABRIR</span> →</span></span>
+                <span class="tile__name">Kit Kumite Aka + Ao (2 Casacos + 1 Calça)</span>
+                <span class="tile__excerpt">Kit Kimono de Competição Kumite (Aka + Ao).</span>
+              </span>
             </button>
           </li>
           <li class="panel panel--flush panel--hover tile" data-reveal style="--i: 1">
             <button class="tile__btn" type="button" data-product="cintos" aria-expanded="false" aria-controls="prod-cintos">
-              <div class="photo zoom"><img src="assets/img/img_5771-800.webp" srcset="assets/img/img_5771-800.webp 800w, assets/img/img_5771-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="Cintos de kumite azul e vermelho Shomen sobre um kimono branco"></div>
-              <div class="tile__body">
-                <p class="tile__ref"><span>REF. BE01</span><span class="open"><span>ABRIR</span> →</span></p>
-                <h3 class="tile__name">Conjunto 2 Cintos (Aka + Ao)</h3>
-                <p class="tile__excerpt">Conjunto de Cintos Kumite Aka + Ao (Azul + Vermelho)</p>
-              </div>
+              <span class="photo zoom"><img src="assets/img/img_5771-800.webp" srcset="assets/img/img_5771-800.webp 800w, assets/img/img_5771-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="Cintos de kumite azul e vermelho Shomen sobre um kimono branco"></span>
+              <span class="tile__body">
+                <span class="tile__ref"><span>REF. BE01</span><span class="open"><span>ABRIR</span> →</span></span>
+                <span class="tile__name">Conjunto 2 Cintos (Aka + Ao)</span>
+                <span class="tile__excerpt">Conjunto de Cintos Kumite Aka + Ao (Azul + Vermelho)</span>
+              </span>
             </button>
           </li>
           <li class="panel panel--flush panel--hover tile" data-reveal style="--i: 2">
             <button class="tile__btn" type="button" data-product="corta-vento" aria-expanded="false" aria-controls="prod-corta-vento">
-              <div class="photo zoom"><img class="pos-top" src="assets/img/img_5352-800.webp" srcset="assets/img/img_5352-800.webp 800w, assets/img/img_5352-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="Atleta com o corta-vento preto Shomen com capuz, visto de frente"></div>
-              <div class="tile__body">
-                <p class="tile__ref"><span>REF. CV01</span><span class="open"><span>ABRIR</span> →</span></p>
-                <h3 class="tile__name">Corta Vento Colapsável</h3>
-                <p class="tile__excerpt">Ideal para aquecimento e viagens.</p>
-              </div>
+              <span class="photo zoom"><img class="pos-top" src="assets/img/img_5352-800.webp" srcset="assets/img/img_5352-800.webp 800w, assets/img/img_5352-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="Atleta com o corta-vento preto Shomen com capuz, visto de frente"></span>
+              <span class="tile__body">
+                <span class="tile__ref"><span>REF. CV01</span><span class="open"><span>ABRIR</span> →</span></span>
+                <span class="tile__name">Corta Vento Colapsável</span>
+                <span class="tile__excerpt">Ideal para aquecimento e viagens.</span>
+              </span>
             </button>
           </li>
           <li class="panel panel--flush panel--hover tile" data-reveal style="--i: 3">
             <button class="tile__btn" type="button" data-product="tshirt" aria-expanded="false" aria-controls="prod-tshirt">
-              <div class="photo zoom"><img class="pos-top" src="assets/img/img_5312-800.webp" srcset="assets/img/img_5312-800.webp 800w, assets/img/img_5312-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="Atleta com a t-shirt técnica preta Shomen, com o logótipo bordado a vermelho no peito"></div>
-              <div class="tile__body">
-                <p class="tile__ref"><span>REF. TS02</span><span class="open"><span>ABRIR</span> →</span></p>
-                <h3 class="tile__name">T-Shirt Técnica Preta</h3>
-                <p class="tile__excerpt">T-Shirt Técnica ultra leve para treino.</p>
-              </div>
+              <span class="photo zoom"><img class="pos-top" src="assets/img/img_5312-800.webp" srcset="assets/img/img_5312-800.webp 800w, assets/img/img_5312-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="Atleta com a t-shirt técnica preta Shomen, com o logótipo bordado a vermelho no peito"></span>
+              <span class="tile__body">
+                <span class="tile__ref"><span>REF. TS02</span><span class="open"><span>ABRIR</span> →</span></span>
+                <span class="tile__name">T-Shirt Técnica Preta</span>
+                <span class="tile__excerpt">T-Shirt Técnica ultra leve para treino.</span>
+              </span>
             </button>
           </li>
         </ul>
@@ -851,7 +848,15 @@ html.js .is-in .readouts li, html.js .more.is-open .readouts li { opacity: 1; tr
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var sda = typeof CSS !== 'undefined' && CSS.supports && CSS.supports('animation-timeline: scroll()');
-  if (sda && !reduce) { root.classList.add('sda'); }
+  if (sda && !reduce) {
+    root.classList.add('sda');
+    /* scroll-driven animations (Chromium, Safari 26+): hero parallax + slow zoom on the root scroll,
+       the small statement/roster photos drift as they cross the viewport. Older browsers keep the JS parallax. */
+    var st = document.createElement('style');
+    st.textContent = 'html.sda .hero__photo img{animation:heroScroll linear both;animation-timeline:scroll(root);animation-range:0 100vh}' +
+      'html.sda .statement .photo img,html.sda .row__thumb img{animation:viewDrift linear both;animation-timeline:view();animation-range:entry 0% exit 100%}';
+    document.head.appendChild(st);
+  }
 
   /* ---------- navigation ---------- */
   var toggle = document.querySelector('.nav__toggle');

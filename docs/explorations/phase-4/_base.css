@@ -224,9 +224,10 @@ img.pos-20 { object-position: 50% 20%; }
 @media (min-width: 720px) { .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .tile { display: flex; flex-direction: column; }
 .tile__btn { display: flex; flex-direction: column; height: 100%; width: 100%; padding: 0; border: 0; background: none; color: inherit; text-align: left; cursor: pointer; font: inherit; }
-.tile .photo { aspect-ratio: 1; }
+.tile .photo { display: block; aspect-ratio: 1; }
 .tile__body { padding: 12px 12px 14px; display: grid; gap: 6px; align-content: start; }
-.tile__name { font-size: clamp(14px, 1.4vw, 17px); font-weight: 900; text-transform: uppercase; line-height: 1.1; letter-spacing: -.005em; margin: 0; transition: color .25s var(--ease); text-wrap: pretty; }
+.tile__name, .tile__ref { display: block; }
+.tile__name { font-size: clamp(14px, 1.4vw, 17px); font-weight: 900; text-transform: uppercase; line-height: 1.1; letter-spacing: -.005em; margin: 0; transition: color .25s var(--ease); text-wrap: pretty; overflow-wrap: normal; }
 .tile__ref { font-family: var(--font-mono); font-size: 12px; color: var(--grey); display: flex; justify-content: space-between; gap: 8px; }
 .tile__ref .open { color: var(--key); opacity: 0; transform: translateX(-6px); transition: opacity .3s var(--ease), transform .3s var(--ease-out); }
 .tile__btn:hover .open, .tile__btn:focus-visible .open, .tile__btn[aria-expanded="true"] .open { opacity: 1; transform: none; }
@@ -346,12 +347,10 @@ html.js .hero.is-in .hero__title .w { opacity: 1; transform: none; transition: o
 html.js .readouts li { opacity: 0; transform: translateX(-8px); }
 html.js .is-in .readouts li, html.js .more.is-open .readouts li { opacity: 1; transform: none; transition: opacity .45s var(--ease-out), transform .45s var(--ease-out); transition-delay: calc(120ms + var(--i, 0) * 60ms); }
 /* type-on micro-labels: JS reveals the characters, this draws the cursor */
-[data-type].is-typing::after { content: "_"; font-family: var(--font-mono); color: var(--key); animation: blink .6s steps(1) infinite; }
-/* scroll-driven where supported: hero photo parallax + slow zoom */
-@supports (animation-timeline: scroll()) {
-  html.js.sda .hero__photo img { animation: heroScroll linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
-  html.js.sda .statement .photo img, html.js.sda .row__thumb img { animation: viewDrift linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
-}
+[data-type].is-typing::after { content: "_"; font-family: var(--font-mono); color: var(--key); }
+/* scroll-driven where supported (hero photo parallax + slow zoom, small photos drift with view()):
+   the animation-timeline / animation-range declarations are added by the script when
+   CSS.supports("animation-timeline: scroll()") is true, so this stylesheet stays validator-clean. */
 @keyframes heroScroll { from { transform: translate3d(calc(var(--mx, 0) * 1px), calc(var(--my, 0) * 1px), 0) scale(1.14); } to { transform: translate3d(calc(var(--mx, 0) * 1px), calc(28vh + var(--my, 0) * 1px), 0) scale(1.24); } }
 @keyframes viewDrift { from { transform: translateY(6%) scale(1.14); } to { transform: translateY(-6%) scale(1.14); } }
 @keyframes fadeIn { from { opacity: 0; } }
@@ -362,11 +361,9 @@ html.js .is-in .readouts li, html.js .more.is-open .readouts li { opacity: 1; tr
 @keyframes rulerScroll { to { background-position: 0 40px; } }
 @keyframes ticker { to { transform: translateX(-50%); } }
 @keyframes glow { 0%, 100% { opacity: .12; transform: scale(1); } 50% { opacity: .22; transform: scale(1.08); } }
-@keyframes blink { 50% { opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
   html.js [data-reveal], html.js .hero__title .w, html.js .readouts li, html.js [data-reveal] .rule--key { opacity: 1; transform: none; transition: none; }
-  .ticker__track, .hero__vword, .hero__ruler, .hero__glow, .reticle .reticle__arms, .modal[open], .modal::backdrop, .nav__menu.is-open .nav__link, [data-type].is-typing::after { animation: none; }
-  html.js.sda .hero__photo img, html.js.sda .statement .photo img, html.js.sda .row__thumb img { animation: none; }
+  .ticker__track, .hero__vword, .hero__ruler, .hero__glow, .reticle .reticle__arms, .modal[open], .modal::backdrop, .nav__menu.is-open .nav__link { animation: none; }
   .btn, .thumbs button, .chip, .zoom img, .panel, .panel::before, .tile, .tile__name, .tile__ref .open, .nav__dot, .sheet, .more, .link-btn::after { transition: none; }
   .parallax img, .hero__photo img { transform: scale(1.02); }
   .tile.is-active { transform: none; }

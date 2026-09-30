@@ -277,12 +277,12 @@ def tile(p, i, extra=""):
     cls = f' class="{cls}"' if cls else ""
     return f"""          <li class="panel panel--flush panel--hover tile" data-reveal style="--i: {i}">
             <button class="tile__btn" type="button" data-product="{p['id']}" aria-expanded="false" aria-controls="prod-{p['id']}">
-              <div class="photo zoom"><img{cls} src="{A}{f}-800.webp" srcset="{A}{f}-800.webp 800w, {A}{f}-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="{alt}"></div>
-              <div class="tile__body">
-                <p class="tile__ref"><span>REF. {p['ref']}</span><span class="open"><span>ABRIR</span> →</span></p>
-                <h3 class="tile__name">{p['name']}</h3>
-                <p class="tile__excerpt">{p['excerpt']}</p>
-              </div>
+              <span class="photo zoom"><img{cls} src="{A}{f}-800.webp" srcset="{A}{f}-800.webp 800w, {A}{f}-1600.webp 1600w" sizes="(min-width: 1280px) 290px, (min-width: 720px) 24vw, 45vw" width="800" height="1200" loading="lazy" alt="{alt}"></span>
+              <span class="tile__body">
+                <span class="tile__ref"><span>REF. {p['ref']}</span><span class="open"><span>ABRIR</span> →</span></span>
+                <span class="tile__name">{p['name']}</span>
+                <span class="tile__excerpt">{p['excerpt']}</span>
+              </span>
             </button>
           </li>
 """
