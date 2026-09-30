@@ -12,23 +12,23 @@
 <body data-key="red">
   <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
 
-  <header class="nav" data-reveal="load">
-    <div class="wrap nav__inner">
+  <header class="nav">
+    <div class="wrap nav__inner" data-reveal="load">
       <a class="nav__logo" href="index.html"><img src="assets/img/originals/union.png" width="960" height="216" alt="Shomen Sports, página inicial"></a>
       <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu"><span class="nav__toggle-label">Menu</span></button>
-      <nav class="nav__menu" id="nav-menu" aria-label="Navegação principal">
-        <ul class="nav__list">
-          <li><a class="nav__link" href="index.html">Início</a></li>
-          <li><a class="nav__link" href="produtos.html">Produtos</a></li>
-          <li><a class="nav__link" href="atletas.html">Atletas</a></li>
-          <li><a class="nav__link" href="components.html" aria-current="page">Componentes</a></li>
-        </ul>
-        <div class="nav__menu-foot">
-          <p class="micro">SHOMEN // KARATE // PORTUGAL</p>
-          <a class="handle" href="https://instagram.com/shomen_sports" rel="noopener">@shomen_sports</a>
-        </div>
-      </nav>
     </div>
+    <nav class="nav__menu" id="nav-menu" aria-label="Navegação principal">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html">Início</a></li>
+        <li><a class="nav__link" href="produtos.html">Produtos</a></li>
+        <li><a class="nav__link" href="atletas.html">Atletas</a></li>
+        <li><a class="nav__link" href="components.html" aria-current="page">Componentes</a></li>
+      </ul>
+      <div class="nav__menu-foot">
+        <p class="micro">SHOMEN // KARATE // PORTUGAL</p>
+        <a class="handle" href="https://instagram.com/shomen_sports" rel="noopener">@shomen_sports</a>
+      </div>
+    </nav>
   </header>
 
   <main id="conteudo">
@@ -37,7 +37,7 @@
         <li><p class="micro micro--dot" data-reveal="load">SHOMEN // HUD // KIT DE COMPONENTES</p></li>
         <li><p class="micro" data-reveal="load"><span class="mono">REF. HUD-WEB-26</span></p></li>
       </ul>
-      <h1 style="margin-top: 24px;">Componentes</h1>
+      <h1 style="margin-top: 24px;">Kit HUD</h1>
       <p class="grey" style="margin-top: 16px;">Página interna, não ligada no menu. Cada bloco repete o kit numa cor-chave: vermelho (Início), azul (Produtos), verde (Atletas, André).</p>
     </section>
 
@@ -210,9 +210,10 @@
       </div>
     </section>
 
-    <section class="section wrap" data-key="red">
+    <section class="section wrap" data-key="red" aria-labelledby="scale-title">
       <div class="section__head">
         <p class="micro micro--dot">ESCALA TIPOGRÁFICA</p>
+        <h2 class="visually-hidden" id="scale-title">Escala tipográfica</h2>
         <hr class="rule rule--key">
       </div>
       <div class="stack stack--lg">

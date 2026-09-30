@@ -1,0 +1,6 @@
+﻿Lighthouse 2026-09-30 — accessibility + best-practices, desktop headless Chromium, local server
+
+index.html  url=http://127.0.0.1:8765/index.html  lighthouse=13.5.0  accessibility=100  best-practices=100  scored-audits=40  color-contrast=1
+produtos.html  url=http://127.0.0.1:8765/produtos.html  lighthouse=13.5.0  accessibility=100  best-practices=100  scored-audits=40  color-contrast=1
+atletas.html  url=http://127.0.0.1:8765/atletas.html  lighthouse=13.5.0  accessibility=100  best-practices=100  scored-audits=40  color-contrast=1
+components.html  url=http://127.0.0.1:8765/components.html  lighthouse=13.5.0  accessibility=100  best-practices=100  scored-audits=40  color-contrast=1

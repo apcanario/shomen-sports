@@ -21,172 +21,223 @@
   <meta name="twitter:title" content="Atletas | Shomen Sports">
   <meta name="twitter:description" content="Conhece os atletas patrocinados pela Shomen Sports: jovens campeões do karate português.">
   <meta name="twitter:image" content="https://www.shomen-sports.com/assets/img/originals/social-media-image.png">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/hud.css">
 </head>
-<body>
+<body data-key="red">
   <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
 
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="index.html">
-        <img src="assets/img/originals/union.png" width="960" height="216" alt="Shomen Sports, página inicial">
-      </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-        <span class="nav-toggle-label">Menu</span>
-      </button>
-      <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
-        <ul>
-          <li><a href="index.html">Início</a></li>
-          <li><a href="produtos.html">Produtos</a></li>
-          <li><a href="atletas.html" aria-current="page">Atletas</a></li>
-        </ul>
-      </nav>
+  <header class="nav">
+    <div class="wrap nav__inner" data-reveal="load">
+      <a class="nav__logo" href="index.html"><img src="assets/img/originals/union.png" width="960" height="216" alt="Shomen Sports, página inicial"></a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu"><span class="nav__toggle-label">Menu</span></button>
     </div>
+    <nav class="nav__menu" id="nav-menu" aria-label="Navegação principal">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html">Início</a></li>
+        <li><a class="nav__link" href="produtos.html">Produtos</a></li>
+        <li><a class="nav__link" href="atletas.html" aria-current="page">Atletas</a></li>
+      </ul>
+      <div class="nav__menu-foot">
+        <p class="micro">SHOMEN // KARATE // PORTUGAL</p>
+        <a class="handle" href="https://instagram.com/shomen_sports" rel="noopener">@shomen_sports</a>
+      </div>
+    </nav>
   </header>
 
   <main id="conteudo">
-    <section class="section" aria-labelledby="atletas-title">
-      <div class="container">
-        <div class="section-header">
-          <h1 id="atletas-title">ATLETAS</h1>
-        </div>
+    <!-- Layout axis: left rail (sticky on desktop) + alternating athlete panels -->
+    <section class="section wrap" aria-labelledby="atletas-title">
+      <div class="section__head">
+        <ul class="microbar">
+          <li><p class="micro micro--dot" data-reveal="load">TEAM SHOMEN // ÉPOCA 2026/27</p></li>
+          <li><p class="micro" data-reveal="load"><span class="mono">ATLETAS // 03</span></p></li>
+        </ul>
+        <h1 id="atletas-title">Atletas</h1>
+        <hr class="rule rule--key">
+      </div>
+      <div class="rail-layout">
+        <aside class="rail">
+          <h2 class="h3">A ÚNICA MARCA PORTUGUESA DE KARATE QUE PAGA PRÉMIOS AOS SEUS ATLETAS</h2>
+          <div class="readout"><p class="micro readout__label">Atletas apoiados</p><p class="readout__value">03</p></div>
+          <nav aria-label="Lista de atletas">
+            <ul class="rail__list">
+              <li><a class="micro micro--white" href="#leonor-goncalves"><span class="mono">01</span> Leonor Gonçalves</a></li>
+              <li><a class="micro micro--white" href="#andre-aguiar"><span class="mono">02</span> André Aguiar</a></li>
+              <li><a class="micro micro--white" href="#martim-sa"><span class="mono">03</span> Martim Sá</a></li>
+            </ul>
+          </nav>
+          <svg class="reticle" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><line x1="12" y1="0" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="24"/><line x1="0" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="24" y2="12"/><circle class="reticle__dot" cx="12" cy="12" r="1.5"/></svg>
+        </aside>
 
-        <ul class="grid" role="list">
-
-          <li class="card athlete" id="leonor-goncalves">
-            <div class="card-media">
-              <img src="assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-800.webp"
-                   srcset="assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-800.webp 800w, assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-1600.webp 896w"
-                   sizes="(min-width: 1132px) 350px, (min-width: 720px) 45vw, calc(100vw - 32px)"
-                   width="800" height="1029"
-                   alt="Leonor Gonçalves de braços cruzados, com kimono Shomen e cinto vermelho">
+        <div>
+          <!-- Leonor: key red, image left -->
+          <article class="panel panel--flush athlete" id="leonor-goncalves" data-key="red" data-reveal="scroll" aria-labelledby="leonor-title">
+            <div class="athlete__media">
+              <div class="photo">
+                <img src="assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-800.webp"
+                     srcset="assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-800.webp 800w, assets/img/whatsapp-image-2025-10-30-at-11.12.51_52007c1a-1600.webp 896w"
+                     sizes="(min-width: 1000px) 380px, (min-width: 900px) 40vw, calc(100vw - 32px)"
+                     width="800" height="1029"
+                     alt="Leonor Gonçalves de braços cruzados, com kimono Shomen e cinto vermelho">
+              </div>
             </div>
-            <div class="card-body">
-              <h2 class="card-title">Leonor Gonçalves</h2>
-              <ul>
-                <li>#1 WKF Ranking Junior -53kg</li>
-                <li>#1 WKF Ranking All Time Cadete -54kg</li>
-                <li>7x Vencedora Karate1 Youth League</li>
-                <li>5º Lugar Campeonato do Mundo WKF</li>
-                <li>7x Campeã Nacional FNK-P</li>
-                <li>2x Vencedora Taça de Portugal FNK-P</li>
+            <div class="athlete__body">
+              <ul class="microbar">
+                <li><p class="micro micro--dot">Atleta // <span class="mono">01</span></p></li>
+                <li><p class="micro"><span class="mono">WKF // KUMITE</span></p></li>
               </ul>
-              <a href="https://www.instagram.com/leonordsgonc" rel="noopener">Instagram</a>
+              <h2 class="name" id="leonor-title"><span class="name__first">Leonor</span><span class="name__last">Gonçalves</span></h2>
+              <div class="stack">
+                <p class="micro">Palmarés</p>
+                <ul class="readouts">
+                  <li><span class="val">#1</span><span class="lab">WKF Ranking Junior <span class="mono">-53kg</span></span></li>
+                  <li><span class="val">#1</span><span class="lab">WKF Ranking All Time Cadete <span class="mono">-54kg</span></span></li>
+                  <li><span class="val">7x</span><span class="lab">Vencedora Karate1 Youth League</span></li>
+                  <li><span class="val">5º</span><span class="lab">Lugar Campeonato do Mundo WKF</span></li>
+                  <li><span class="val">7x</span><span class="lab">Campeã Nacional FNK-P</span></li>
+                  <li><span class="val">2x</span><span class="lab">Vencedora Taça de Portugal FNK-P</span></li>
+                </ul>
+              </div>
+              <a class="handle" href="https://www.instagram.com/leonordsgonc" rel="noopener">@leonordsgonc</a>
             </div>
-          </li>
+          </article>
 
-          <li class="card athlete" id="andre-aguiar">
-            <div class="card-media">
-              <img class="pos-top" src="assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-800.webp"
-                   srcset="assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-800.webp 800w, assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-1600.webp 896w"
-                   sizes="(min-width: 1132px) 350px, (min-width: 720px) 45vw, calc(100vw - 32px)"
-                   width="800" height="1429" loading="lazy"
-                   alt="André Aguiar de fato azul a segurar um troféu">
+          <!-- André: key green, image right -->
+          <article class="panel panel--flush athlete athlete--flip" id="andre-aguiar" data-key="green" data-reveal="scroll" aria-labelledby="andre-title">
+            <div class="athlete__media">
+              <div class="photo">
+                <img class="pos-top" src="assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-800.webp"
+                     srcset="assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-800.webp 800w, assets/img/whatsapp-image-2025-10-29-at-23.29.41_64179326-1600.webp 896w"
+                     sizes="(min-width: 1000px) 380px, (min-width: 900px) 40vw, calc(100vw - 32px)"
+                     width="800" height="1429" loading="lazy"
+                     alt="André Aguiar de fato azul a segurar um troféu">
+              </div>
             </div>
-            <div class="card-body">
-              <h2 class="card-title">André Aguiar</h2>
-              <ul>
-                <li>Vencedor Karate1 Youth League Guadalajara 2025 Cadete +70kg</li>
-                <li>Medalhista Karate1 Youth League Monterrey 2025 Junior +76kg</li>
-                <li>Campeão Nacional FNK-P</li>
-                <li>2x Vencedor da Taça de Portugal FNK-P</li>
-                <li>Vencedor Taça da Liga FNK-P</li>
+            <div class="athlete__body">
+              <ul class="microbar">
+                <li><p class="micro micro--dot">Atleta // <span class="mono">02</span></p></li>
+                <li><p class="micro"><span class="mono">WKF // KUMITE</span></p></li>
               </ul>
+              <h2 class="name" id="andre-title"><span class="name__first">André</span><span class="name__last">Aguiar</span></h2>
+              <div class="stack">
+                <p class="micro">Palmarés</p>
+                <ul class="readouts">
+                  <li><span class="val"></span><span class="lab">Vencedor Karate1 Youth League Guadalajara <span class="mono">2025</span> Cadete <span class="mono">+70kg</span></span></li>
+                  <li><span class="val"></span><span class="lab">Medalhista Karate1 Youth League Monterrey <span class="mono">2025</span> Junior <span class="mono">+76kg</span></span></li>
+                  <li><span class="val"></span><span class="lab">Campeão Nacional FNK-P</span></li>
+                  <li><span class="val">2x</span><span class="lab">Vencedor da Taça de Portugal FNK-P</span></li>
+                  <li><span class="val"></span><span class="lab">Vencedor Taça da Liga FNK-P</span></li>
+                </ul>
+              </div>
               <!-- Instagram URL taken from the old site; the rebuild brief listed https://www.instagram.com/aguiar05./ -->
               <!-- TODO: confirm André's Instagram handle (_aguiar05._ on the old site vs aguiar05. in the brief) -->
-              <a href="https://www.instagram.com/_aguiar05._/" rel="noopener">Instagram</a>
+              <a class="handle" href="https://www.instagram.com/_aguiar05._/" rel="noopener">@_aguiar05._</a>
             </div>
-          </li>
+          </article>
 
-          <li class="card athlete" id="martim-sa">
-            <div class="card-media">
-              <img class="pos-top" src="assets/img/whatsapp-image-2025-10-29-at-08.45.16_3fd8c6dc-800.webp"
-                   srcset="assets/img/whatsapp-image-2025-10-29-at-08.45.16_3fd8c6dc-800.webp 800w, assets/img/whatsapp-image-2025-10-29-at-08.45.16_3fd8c6dc-1600.webp 1200w"
-                   sizes="(min-width: 1132px) 350px, (min-width: 720px) 45vw, calc(100vw - 32px)"
-                   width="800" height="1067" loading="lazy"
-                   alt="Martim Sá em cima do tatami, com o corta-vento Shomen e o punho levantado">
+          <!-- Martim: key red (rotation: red after green), image left -->
+          <article class="panel panel--flush athlete" id="martim-sa" data-key="red" data-reveal="scroll" aria-labelledby="martim-title">
+            <div class="athlete__media">
+              <div class="photo">
+                <img class="pos-top" src="assets/img/whatsapp-image-2025-10-29-at-08.45.16_3fd8c6dc-800.webp"
+                     srcset="assets/img/whatsapp-image-2025-10-29-at-08.45.16_3fd8c6dc-800.webp 800w, assets/img/whatsapp-image-2025-10-29-at-08.45.16_3fd8c6dc-1600.webp 1200w"
+                     sizes="(min-width: 1000px) 380px, (min-width: 900px) 40vw, calc(100vw - 32px)"
+                     width="800" height="1067" loading="lazy"
+                     alt="Martim Sá em cima do tatami, com o corta-vento Shomen e o punho levantado">
+              </div>
             </div>
-            <div class="card-body">
-              <h2 class="card-title">Martim Sá</h2>
-              <ul>
-                <li>5º Lugar Open Lisboa 2025</li>
+            <div class="athlete__body">
+              <ul class="microbar">
+                <li><p class="micro micro--dot">Atleta // <span class="mono">03</span></p></li>
               </ul>
+              <h2 class="name" id="martim-title"><span class="name__first">Martim</span><span class="name__last">Sá</span></h2>
+              <div class="stack">
+                <p class="micro">Palmarés</p>
+                <ul class="readouts">
+                  <li><span class="val">5º</span><span class="lab">Lugar Open Lisboa <span class="mono">2025</span></span></li>
+                </ul>
+              </div>
               <!-- TODO: Martim's Instagram (the old site linked Leonor's profile here by mistake) -->
             </div>
-          </li>
+          </article>
 
-          <!-- TODO: photo + achievements (Guilherme Gonçalves, sponsored, not yet on the site).
+          <!-- TODO: photo + achievements (Guilherme Gonçalves, sponsored, not yet on the site). Key colour green (rotation), image right.
                Card skeleton, uncomment and fill in when ready:
-          <li class="card athlete" id="guilherme-goncalves">
-            <div class="card-media">
-              <img src="assets/img/FILE-800.webp" srcset="assets/img/FILE-800.webp 800w, assets/img/FILE-1600.webp 1600w" sizes="(min-width: 1132px) 350px, (min-width: 720px) 45vw, calc(100vw - 32px)" width="800" height="1000" loading="lazy" alt="">
+          <article class="panel panel--flush athlete athlete--flip" id="guilherme-goncalves" data-key="green" data-reveal="scroll" aria-labelledby="guilherme-title">
+            <div class="athlete__media">
+              <div class="photo"><img src="assets/img/FILE-800.webp" srcset="assets/img/FILE-800.webp 800w, assets/img/FILE-1600.webp 1600w" sizes="(min-width: 1000px) 380px, (min-width: 900px) 40vw, calc(100vw - 32px)" width="800" height="1000" loading="lazy" alt=""></div>
             </div>
-            <div class="card-body">
-              <h2 class="card-title">Guilherme Gonçalves</h2>
-              <ul>
-                <li>TODO: photo + achievements</li>
-              </ul>
-              <a href="https://www.instagram.com/" rel="noopener">Instagram</a>
+            <div class="athlete__body">
+              <ul class="microbar"><li><p class="micro micro--dot">Atleta // <span class="mono">04</span></p></li></ul>
+              <h2 class="name" id="guilherme-title"><span class="name__first">Guilherme</span><span class="name__last">Gonçalves</span></h2>
+              <div class="stack">
+                <p class="micro">Palmarés</p>
+                <ul class="readouts">
+                  <li><span class="val"></span><span class="lab">TODO: photo + achievements</span></li>
+                </ul>
+              </div>
+              <a class="handle" href="https://www.instagram.com/" rel="noopener">@handle</a>
             </div>
-          </li>
+          </article>
           -->
 
-          <!-- TODO: photo + achievements (Santiago Gonçalves, sponsored, not yet on the site).
+          <!-- TODO: photo + achievements (Santiago Gonçalves, sponsored, not yet on the site). Key colour red (rotation), image left.
                Card skeleton, uncomment and fill in when ready:
-          <li class="card athlete" id="santiago-goncalves">
-            <div class="card-media">
-              <img src="assets/img/FILE-800.webp" srcset="assets/img/FILE-800.webp 800w, assets/img/FILE-1600.webp 1600w" sizes="(min-width: 1132px) 350px, (min-width: 720px) 45vw, calc(100vw - 32px)" width="800" height="1000" loading="lazy" alt="">
+          <article class="panel panel--flush athlete" id="santiago-goncalves" data-key="red" data-reveal="scroll" aria-labelledby="santiago-title">
+            <div class="athlete__media">
+              <div class="photo"><img src="assets/img/FILE-800.webp" srcset="assets/img/FILE-800.webp 800w, assets/img/FILE-1600.webp 1600w" sizes="(min-width: 1000px) 380px, (min-width: 900px) 40vw, calc(100vw - 32px)" width="800" height="1000" loading="lazy" alt=""></div>
             </div>
-            <div class="card-body">
-              <h2 class="card-title">Santiago Gonçalves</h2>
-              <ul>
-                <li>TODO: photo + achievements</li>
-              </ul>
-              <a href="https://www.instagram.com/" rel="noopener">Instagram</a>
+            <div class="athlete__body">
+              <ul class="microbar"><li><p class="micro micro--dot">Atleta // <span class="mono">05</span></p></li></ul>
+              <h2 class="name" id="santiago-title"><span class="name__first">Santiago</span><span class="name__last">Gonçalves</span></h2>
+              <div class="stack">
+                <p class="micro">Palmarés</p>
+                <ul class="readouts">
+                  <li><span class="val"></span><span class="lab">TODO: photo + achievements</span></li>
+                </ul>
+              </div>
+              <a class="handle" href="https://www.instagram.com/" rel="noopener">@handle</a>
             </div>
-          </li>
+          </article>
           -->
-
-        </ul>
+        </div>
       </div>
     </section>
 
     <!-- Contacto -->
-    <section class="section contact" id="contacto" aria-labelledby="contacto-title">
-      <div class="container">
-        <div class="section-header">
+    <section class="section" id="contacto" aria-labelledby="contacto-title">
+      <div class="wrap">
+        <div class="panel contact" data-reveal="scroll">
+          <p class="micro micro--dot">Contacto // encomendas e parcerias</p>
           <h2 id="contacto-title">CONTACTa-NOS</h2>
-        </div>
-        <div class="prose">
+          <hr class="rule rule--key">
           <p>Pretendes mais informação sobre os produtos ou é um clube e pretende discutir parcerias? Entra em contacto!</p>
-        </div>
-        <div class="actions">
-          <a class="btn" href="mailto:info@shomen-sports.com">info@shomen-sports.com</a>
-          <a class="btn btn-secondary" href="https://instagram.com/shomen_sports" rel="noopener">Instagram @shomen_sports</a>
+          <div class="actions actions--center">
+            <a class="btn btn--primary" href="mailto:info@shomen-sports.com">info@shomen-sports.com</a>
+            <a class="btn" href="https://instagram.com/shomen_sports" rel="noopener">@shomen_sports</a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <a class="brand" href="index.html">
-        <img src="assets/img/originals/union.png" width="960" height="216" alt="Shomen Sports, página inicial">
-      </a>
-      <nav class="footer-nav" aria-label="Rodapé">
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <a class="footer__logo" href="index.html"><img src="assets/img/originals/union.png" width="960" height="216" alt="Shomen Sports, página inicial"></a>
+      <nav class="footer__nav" aria-label="Rodapé">
         <ul>
-          <li><a href="index.html">Início</a></li>
-          <li><a href="produtos.html">Produtos</a></li>
-          <li><a href="atletas.html">Atletas</a></li>
+          <li><a class="micro micro--white" href="index.html">Início</a></li>
+          <li><a class="micro micro--white" href="produtos.html">Produtos</a></li>
+          <li><a class="micro micro--white" href="atletas.html">Atletas</a></li>
         </ul>
       </nav>
-      <address class="footer-links">
+      <address class="footer__links">
         <ul>
-          <li><a href="https://instagram.com/shomen_sports" rel="noopener">Instagram</a></li>
-          <li><a href="mailto:info@shomen-sports.com">info@shomen-sports.com</a></li>
+          <li><a class="handle" href="https://instagram.com/shomen_sports" rel="noopener">@shomen_sports</a></li>
+          <li><a class="micro micro--white" href="mailto:info@shomen-sports.com">info@shomen-sports.com</a></li>
         </ul>
       </address>
-      <p class="copyright">SHOMEN SPORTS © 2026</p>
+      <p class="micro footer__copy">SHOMEN © 2026</p>
     </div>
   </footer>
 

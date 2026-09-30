@@ -21,46 +21,57 @@
   <meta name="twitter:title" content="Shomen Sports | Equipamento de Karate">
   <meta name="twitter:description" content="Equipamento de competição de kumite criado em Portugal, por atletas para atletas.">
   <meta name="twitter:image" content="https://www.shomen-sports.com/assets/img/originals/social-media-image.png">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/hud.css">
 </head>
-<body>
+<body data-key="red">
   <a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
 
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="index.html">
-        <img src="assets/img/originals/union.png" width="960" height="216" alt="Shomen Sports, página inicial">
-      </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-        <span class="nav-toggle-label">Menu</span>
-      </button>
-      <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
-        <ul>
-          <li><a href="index.html" aria-current="page">Início</a></li>
-          <li><a href="produtos.html">Produtos</a></li>
-          <li><a href="atletas.html">Atletas</a></li>
-        </ul>
-      </nav>
+  <header class="nav">
+    <div class="wrap nav__inner" data-reveal="load">
+      <a class="nav__logo" href="index.html"><img src="assets/img/originals/union.png" width="960" height="216" alt="Shomen Sports, página inicial"></a>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu"><span class="nav__toggle-label">Menu</span></button>
     </div>
+    <nav class="nav__menu" id="nav-menu" aria-label="Navegação principal">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="index.html" aria-current="page">Início</a></li>
+        <li><a class="nav__link" href="produtos.html">Produtos</a></li>
+        <li><a class="nav__link" href="atletas.html">Atletas</a></li>
+      </ul>
+      <div class="nav__menu-foot">
+        <p class="micro">SHOMEN // KARATE // PORTUGAL</p>
+        <a class="handle" href="https://instagram.com/shomen_sports" rel="noopener">@shomen_sports</a>
+      </div>
+    </nav>
   </header>
 
   <main id="conteudo">
 
-    <!-- Hero -->
+    <!-- Hero: full-bleed photo, bottom fade, three stacked lines, HOJE in the key colour, right-aligned readouts, vertical word on the right strip (desktop) -->
     <section class="hero" aria-labelledby="hero-title">
-      <img class="hero-bg"
-           src="assets/img/img_5512-1600.webp"
-           srcset="assets/img/img_5512-800.webp 800w, assets/img/img_5512-1600.webp 1600w"
-           sizes="100vw"
-           width="1600" height="1067"
-           fetchpriority="high"
-           alt="Pormenor de um kimono de kumite branco Shomen com cinto vermelho e luva vermelha">
-      <div class="container">
-        <img class="hero-lockup" src="assets/img/originals/group-137.png" width="2500" height="1919" alt="Logótipo Shomen: hexágono vermelho com a letra S e a palavra Shomen">
-        <h1 id="hero-title">OS CAMPEÕES DE AMANHÃ COMEÇAM HOJE</h1>
-        <div class="actions">
-          <a class="btn" href="produtos.html">Ver produtos</a>
-          <a class="btn btn-secondary" href="atletas.html">Conhecer os atletas</a>
+      <div class="photo photo--fade hero__photo">
+        <img src="assets/img/img_5512-1600.webp"
+             srcset="assets/img/img_5512-800.webp 800w, assets/img/img_5512-1600.webp 1600w"
+             sizes="100vw" width="1600" height="1067" fetchpriority="high"
+             alt="Pormenor de um kimono de kumite branco Shomen com cinto vermelho e luva vermelha">
+      </div>
+      <p class="hero__vword" aria-hidden="true">Shomen</p>
+      <div class="wrap hero__content">
+        <div class="stack stack--lg">
+          <ul class="microbar microbar--start">
+            <li><p class="micro micro--dot micro--white" data-reveal="load">SHOMEN // KARATE // PORTUGAL</p></li>
+            <li><p class="micro" data-reveal="load"><span class="mono">EST. 2025</span></p></li>
+          </ul>
+          <h1 id="hero-title" class="hero__title"><span>OS CAMPEÕES</span><span>DE AMANHÃ</span><span>COMEÇAM <span class="key">HOJE</span></span></h1>
+          <div class="hero__foot">
+            <div class="actions">
+              <a class="btn btn--primary" href="produtos.html">Ver produtos</a>
+              <a class="btn" href="atletas.html">Conhecer os atletas</a>
+            </div>
+            <div class="hero__readouts">
+              <div class="readout readout--end readout--sm"><p class="micro readout__label">Atletas apoiados</p><p class="readout__value">03</p></div>
+              <div class="readout readout--end"><p class="micro readout__label">Est.</p><p class="readout__value">2025</p></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -68,171 +79,172 @@
     <!-- Compromisso -->
     <!-- TODO: copy for Pedro's review -->
     <section class="section" id="compromisso" aria-labelledby="compromisso-title">
-      <div class="container">
-        <div class="section-header">
-          <h2 id="compromisso-title">O NOSSO COMPROMISSO</h2>
-        </div>
-        <div class="prose">
-          <p>A Shomen Sports nasceu em 2025, em Portugal, criada por atletas para atletas.</p>
-          <p>Fabricamos equipamento de competição de kumite a preços acessíveis, para que competir seja possível para os jovens atletas cujo talento é maior do que o orçamento da família.</p>
-          <p>Patrocinamos uma equipa de jovens atletas de nível de seleção nacional e somos a única marca portuguesa de karate que paga prémios monetários aos seus atletas.</p>
+      <div class="wrap">
+        <div class="panel" data-reveal="scroll">
+          <div class="panel__head">
+            <p class="micro micro--dot">O NOSSO COMPROMISSO</p>
+            <p class="micro"><span class="mono">SEC. 01</span></p>
+          </div>
+          <div class="fact">
+            <div class="fact__copy">
+              <h2 id="compromisso-title" class="h2--band">A ÚNICA MARCA PORTUGUESA DE KARATE QUE PAGA PRÉMIOS AOS SEUS ATLETAS</h2>
+              <hr class="rule rule--key">
+              <p>A Shomen Sports nasceu em 2025, em Portugal, criada por atletas para atletas.</p>
+              <p>Fabricamos equipamento de competição de kumite a preços acessíveis, para que competir seja possível para os jovens atletas cujo talento é maior do que o orçamento da família.</p>
+              <p>Patrocinamos uma equipa de jovens atletas de nível de seleção nacional e somos a única marca portuguesa de karate que paga prémios monetários aos seus atletas.</p>
+            </div>
+            <div class="fact__aside">
+              <div class="readout"><p class="micro readout__label">Atletas apoiados</p><p class="readout__value">03</p></div>
+              <svg class="reticle" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><line x1="12" y1="0" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="24"/><line x1="0" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="24" y2="12"/><circle class="reticle__dot" cx="12" cy="12" r="1.5"/></svg>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Produtos teaser -->
     <section class="section" id="produtos" aria-labelledby="produtos-title">
-      <div class="container">
-        <div class="section-header">
+      <div class="wrap">
+        <div class="section__head">
+          <ul class="microbar">
+            <li><p class="micro micro--dot">Equipamento</p></li>
+            <li><p class="micro"><span class="mono">04 // KU01 · BE01 · CV01 · TS02</span></p></li>
+          </ul>
           <h2 id="produtos-title">Equipa-te para a competição</h2>
+          <hr class="rule rule--key">
         </div>
-        <ul class="grid grid-4" role="list">
-          <li class="card">
-            <a class="card-link" href="produtos.html#kit-kumite-aka-ao">
-              <div class="card-media">
-                <img src="assets/img/img_5415-800.webp"
-                     srcset="assets/img/img_5415-800.webp 800w, assets/img/img_5415-1600.webp 1600w"
-                     sizes="(min-width: 1132px) 350px, (min-width: 720px) 45vw, calc(100vw - 32px)"
-                     width="800" height="1200" loading="lazy"
-                     alt="Casaco de kimono de kumite branco Shomen com cinto vermelho, visto de frente">
-              </div>
-              <div class="card-body">
-                <h3 class="card-title">Kit Kumite Aka + Ao (2 Casacos + 1 Calça)</h3>
-                <p>Kit Kimono de Competição Kumite (Aka + Ao).</p>
+        <ul class="grid grid--4">
+          <li class="panel panel--flush tile" data-reveal="scroll">
+            <a href="produtos.html#kit-kumite-aka-ao">
+              <div class="photo"><img src="assets/img/img_5415-800.webp" srcset="assets/img/img_5415-800.webp 800w, assets/img/img_5415-1600.webp 1600w" sizes="(min-width: 1280px) 280px, (min-width: 720px) 45vw, calc(100vw - 32px)" width="800" height="1200" loading="lazy" alt="Casaco de kimono de kumite branco Shomen com cinto vermelho, visto de frente"></div>
+              <div class="tile__body">
+                <p class="tile__ref">REF. KU01</p>
+                <h3 class="tile__name">Kit Kumite Aka + Ao (2 Casacos + 1 Calça)</h3>
+                <p class="tile__excerpt">Kit Kimono de Competição Kumite (Aka + Ao).</p>
               </div>
             </a>
           </li>
-          <li class="card">
-            <a class="card-link" href="produtos.html#cintos-kumite">
-              <div class="card-media">
-                <img src="assets/img/img_5771-800.webp"
-                     srcset="assets/img/img_5771-800.webp 800w, assets/img/img_5771-1600.webp 1600w"
-                     sizes="(min-width: 1132px) 350px, (min-width: 720px) 45vw, calc(100vw - 32px)"
-                     width="800" height="1200" loading="lazy"
-                     alt="Cintos de kumite azul e vermelho Shomen sobre um kimono branco">
-              </div>
-              <div class="card-body">
-                <h3 class="card-title">Conjunto 2 Cintos (Aka + Ao)</h3>
-                <p>Conjunto de Cintos Kumite Aka + Ao (Azul + Vermelho)</p>
+          <li class="panel panel--flush tile" data-reveal="scroll">
+            <a href="produtos.html#cintos-kumite">
+              <div class="photo"><img src="assets/img/img_5771-800.webp" srcset="assets/img/img_5771-800.webp 800w, assets/img/img_5771-1600.webp 1600w" sizes="(min-width: 1280px) 280px, (min-width: 720px) 45vw, calc(100vw - 32px)" width="800" height="1200" loading="lazy" alt="Cintos de kumite azul e vermelho Shomen sobre um kimono branco"></div>
+              <div class="tile__body">
+                <p class="tile__ref">REF. BE01</p>
+                <h3 class="tile__name">Conjunto 2 Cintos (Aka + Ao)</h3>
+                <p class="tile__excerpt">Conjunto de Cintos Kumite Aka + Ao (Azul + Vermelho)</p>
               </div>
             </a>
           </li>
-          <li class="card">
-            <a class="card-link" href="produtos.html#corta-vento">
-              <div class="card-media">
-                <img class="pos-top" src="assets/img/img_5352-800.webp"
-                     srcset="assets/img/img_5352-800.webp 800w, assets/img/img_5352-1600.webp 1600w"
-                     sizes="(min-width: 1132px) 350px, (min-width: 720px) 45vw, calc(100vw - 32px)"
-                     width="800" height="1200" loading="lazy"
-                     alt="Atleta com o corta-vento preto Shomen com capuz, visto de frente">
-              </div>
-              <div class="card-body">
-                <h3 class="card-title">Corta Vento Colapsável</h3>
-                <p>Ideal para aquecimento e viagens.</p>
+          <li class="panel panel--flush tile" data-reveal="scroll">
+            <a href="produtos.html#corta-vento">
+              <div class="photo"><img class="pos-top" src="assets/img/img_5352-800.webp" srcset="assets/img/img_5352-800.webp 800w, assets/img/img_5352-1600.webp 1600w" sizes="(min-width: 1280px) 280px, (min-width: 720px) 45vw, calc(100vw - 32px)" width="800" height="1200" loading="lazy" alt="Atleta com o corta-vento preto Shomen com capuz, visto de frente"></div>
+              <div class="tile__body">
+                <p class="tile__ref">REF. CV01</p>
+                <h3 class="tile__name">Corta Vento Colapsável</h3>
+                <p class="tile__excerpt">Ideal para aquecimento e viagens.</p>
               </div>
             </a>
           </li>
-          <li class="card">
-            <a class="card-link" href="produtos.html#tshirt-preta">
-              <div class="card-media">
-                <img class="pos-top" src="assets/img/img_5312-800.webp"
-                     srcset="assets/img/img_5312-800.webp 800w, assets/img/img_5312-1600.webp 1600w"
-                     sizes="(min-width: 1132px) 350px, (min-width: 720px) 45vw, calc(100vw - 32px)"
-                     width="800" height="1200" loading="lazy"
-                     alt="Atleta com a t-shirt técnica preta Shomen, com o logótipo bordado a vermelho no peito">
-              </div>
-              <div class="card-body">
-                <h3 class="card-title">T-Shirt Técnica Preta</h3>
-                <p>T-Shirt Técnica ultra leve para treino.</p>
+          <li class="panel panel--flush tile" data-reveal="scroll">
+            <a href="produtos.html#tshirt-preta">
+              <div class="photo"><img class="pos-top" src="assets/img/img_5312-800.webp" srcset="assets/img/img_5312-800.webp 800w, assets/img/img_5312-1600.webp 1600w" sizes="(min-width: 1280px) 280px, (min-width: 720px) 45vw, calc(100vw - 32px)" width="800" height="1200" loading="lazy" alt="Atleta com a t-shirt técnica preta Shomen, com o logótipo bordado a vermelho no peito"></div>
+              <div class="tile__body">
+                <p class="tile__ref">REF. TS02</p>
+                <h3 class="tile__name">T-Shirt Técnica Preta</h3>
+                <p class="tile__excerpt">T-Shirt Técnica ultra leve para treino.</p>
               </div>
             </a>
           </li>
         </ul>
-        <div class="section-footer">
+        <div class="actions" style="margin-top: 32px;">
           <a class="btn" href="produtos.html">Ver todos os produtos</a>
         </div>
       </div>
     </section>
 
-    <!-- Statement bands -->
+    <!-- Statement bands: photo left / text right on desktop, stacked on mobile -->
     <section class="section" aria-label="Competição e materiais">
-      <div class="container">
-        <div class="band">
-          <div class="band-media">
-            <img src="assets/img/img_5811-800.webp"
-                 srcset="assets/img/img_5811-800.webp 800w, assets/img/img_5811-1600.webp 1600w"
-                 sizes="(min-width: 1132px) 526px, (min-width: 720px) 48vw, calc(100vw - 32px)"
-                 width="800" height="1200" loading="lazy"
-                 alt="Pormenor das letras Shomen bordadas a azul na manga de um kimono branco">
+      <div class="wrap">
+        <div class="band" data-reveal="scroll">
+          <div class="photo photo--vignette">
+            <img src="assets/img/img_5811-800.webp" srcset="assets/img/img_5811-800.webp 800w, assets/img/img_5811-1600.webp 1600w" sizes="(min-width: 1280px) 460px, (min-width: 720px) 40vw, calc(100vw - 32px)" width="800" height="1200" loading="lazy" alt="Pormenor das letras Shomen bordadas a azul na manga de um kimono branco">
           </div>
-          <h2>prontos para TODAS AS COMPETIÇÕES<br>FNK-P, OPENS nacionais e internacionais</h2>
+          <div class="band__body">
+            <p class="micro micro--dot">Competição</p>
+            <h2 class="h2--band">prontos para TODAS AS COMPETIÇÕES<br>FNK-P, OPENS nacionais e internacionais</h2>
+            <hr class="rule rule--key">
+          </div>
         </div>
-        <div class="band band-reverse">
-          <div class="band-media">
-            <img class="pos-top" src="assets/img/img_5377-800.webp"
-                 srcset="assets/img/img_5377-800.webp 800w, assets/img/img_5377-1600.webp 1600w"
-                 sizes="(min-width: 1132px) 526px, (min-width: 720px) 48vw, calc(100vw - 32px)"
-                 width="800" height="1200" loading="lazy"
-                 alt="Atleta a executar um pontapé com o corta-vento preto Shomen e luvas vermelhas">
+        <div class="band" data-reveal="scroll">
+          <div class="photo photo--vignette">
+            <img class="pos-top" src="assets/img/img_5377-800.webp" srcset="assets/img/img_5377-800.webp 800w, assets/img/img_5377-1600.webp 1600w" sizes="(min-width: 1280px) 460px, (min-width: 720px) 40vw, calc(100vw - 32px)" width="800" height="1200" loading="lazy" alt="Atleta a executar um pontapé com o corta-vento preto Shomen e luvas vermelhas">
           </div>
-          <h2>FABRICADOS COM MATERIAIS DE TOPO DE GAMA,<br>PRONTOS PARA TE LEVAR AO TOPO DO pÓDIO</h2>
+          <div class="band__body">
+            <p class="micro micro--dot">Materiais</p>
+            <h2 class="h2--band">FABRICADOS COM MATERIAIS DE TOPO DE GAMA,<br>PRONTOS PARA TE LEVAR AO TOPO DO pÓDIO</h2>
+            <hr class="rule rule--key">
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Atletas teaser -->
+    <!-- Atletas teaser: 4-photo strip (no athlete labels: none of these photos is an identified athlete, see assets/img/SOURCES.md) -->
     <section class="section" id="atletas" aria-labelledby="atletas-title">
-      <div class="container">
-        <div class="section-header">
+      <div class="wrap">
+        <div class="section__head">
+          <ul class="microbar">
+            <li><p class="micro micro--dot">Team Shomen</p></li>
+            <li><p class="micro"><span class="mono">ATLETAS // 03</span></p></li>
+          </ul>
           <h2 id="atletas-title">FIca A CONHECER OS NOSSOS ATLETAS</h2>
+          <hr class="rule rule--key">
         </div>
-        <ul class="strip" role="list">
-          <li><img src="assets/img/img_5512-800.webp" srcset="assets/img/img_5512-800.webp 800w, assets/img/img_5512-1600.webp 1600w" sizes="(min-width: 1132px) 260px, (min-width: 720px) 24vw, 48vw" width="800" height="533" loading="lazy" alt="Pormenor do cinto vermelho e da luva vermelha sobre um kimono Shomen"></li>
-          <li><img src="assets/img/img_5799-800.webp" srcset="assets/img/img_5799-800.webp 800w, assets/img/img_5799-1600.webp 1600w" sizes="(min-width: 1132px) 260px, (min-width: 720px) 24vw, 48vw" width="800" height="1200" loading="lazy" alt="Kimonos Shomen dobrados com cintos azul e vermelho"></li>
-          <li><img src="assets/img/img_5526-800.webp" srcset="assets/img/img_5526-800.webp 800w, assets/img/img_5526-1600.webp 1600w" sizes="(min-width: 1132px) 260px, (min-width: 720px) 24vw, 48vw" width="800" height="533" loading="lazy" alt="Atleta com o kimono Shomen a segurar uma luva vermelha"></li>
-          <li><img src="assets/img/img_5480-800.webp" srcset="assets/img/img_5480-800.webp 800w, assets/img/img_5480-1600.webp 1600w" sizes="(min-width: 1132px) 260px, (min-width: 720px) 24vw, 48vw" width="800" height="533" loading="lazy" alt="Costas de um casaco de kimono Shomen com o logótipo bordado a vermelho na nuca"></li>
+        <ul class="strip" data-reveal="scroll">
+          <li><div class="photo"><img src="assets/img/img_5512-800.webp" srcset="assets/img/img_5512-800.webp 800w, assets/img/img_5512-1600.webp 1600w" sizes="(min-width: 1280px) 280px, (min-width: 720px) 24vw, 48vw" width="800" height="533" loading="lazy" alt="Pormenor do cinto vermelho e da luva vermelha sobre um kimono Shomen"></div></li>
+          <li><div class="photo"><img src="assets/img/img_5799-800.webp" srcset="assets/img/img_5799-800.webp 800w, assets/img/img_5799-1600.webp 1600w" sizes="(min-width: 1280px) 280px, (min-width: 720px) 24vw, 48vw" width="800" height="1200" loading="lazy" alt="Kimonos Shomen dobrados com cintos azul e vermelho"></div></li>
+          <li><div class="photo"><img src="assets/img/img_5526-800.webp" srcset="assets/img/img_5526-800.webp 800w, assets/img/img_5526-1600.webp 1600w" sizes="(min-width: 1280px) 280px, (min-width: 720px) 24vw, 48vw" width="800" height="533" loading="lazy" alt="Atleta com o kimono Shomen a segurar uma luva vermelha"></div></li>
+          <li><div class="photo"><img src="assets/img/img_5480-800.webp" srcset="assets/img/img_5480-800.webp 800w, assets/img/img_5480-1600.webp 1600w" sizes="(min-width: 1280px) 280px, (min-width: 720px) 24vw, 48vw" width="800" height="533" loading="lazy" alt="Costas de um casaco de kimono Shomen com o logótipo bordado a vermelho na nuca"></div></li>
         </ul>
-        <a class="btn" href="atletas.html">os campeões shomen</a>
+        <div class="actions" style="margin-top: 32px;">
+          <a class="btn" href="atletas.html">os campeões shomen</a>
+        </div>
       </div>
     </section>
 
     <!-- Contacto -->
-    <section class="section contact" id="contacto" aria-labelledby="contacto-title">
-      <div class="container">
-        <div class="section-header">
+    <section class="section" id="contacto" aria-labelledby="contacto-title">
+      <div class="wrap">
+        <div class="panel contact" data-reveal="scroll">
+          <p class="micro micro--dot">Contacto // encomendas e parcerias</p>
           <h2 id="contacto-title">CONTACTa-NOS</h2>
-        </div>
-        <div class="prose">
+          <hr class="rule rule--key">
           <p>Pretendes mais informação sobre os produtos ou é um clube e pretende discutir parcerias? Entra em contacto!</p>
-        </div>
-        <div class="actions">
-          <a class="btn" href="mailto:info@shomen-sports.com">info@shomen-sports.com</a>
-          <a class="btn btn-secondary" href="https://instagram.com/shomen_sports" rel="noopener">Instagram @shomen_sports</a>
+          <div class="actions actions--center">
+            <a class="btn btn--primary" href="mailto:info@shomen-sports.com">info@shomen-sports.com</a>
+            <a class="btn" href="https://instagram.com/shomen_sports" rel="noopener">@shomen_sports</a>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <a class="brand" href="index.html">
-        <img src="assets/img/originals/union.png" width="960" height="216" alt="Shomen Sports, página inicial">
-      </a>
-      <nav class="footer-nav" aria-label="Rodapé">
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <a class="footer__logo" href="index.html"><img src="assets/img/originals/union.png" width="960" height="216" alt="Shomen Sports, página inicial"></a>
+      <nav class="footer__nav" aria-label="Rodapé">
         <ul>
-          <li><a href="index.html">Início</a></li>
-          <li><a href="produtos.html">Produtos</a></li>
-          <li><a href="atletas.html">Atletas</a></li>
+          <li><a class="micro micro--white" href="index.html">Início</a></li>
+          <li><a class="micro micro--white" href="produtos.html">Produtos</a></li>
+          <li><a class="micro micro--white" href="atletas.html">Atletas</a></li>
         </ul>
       </nav>
-      <address class="footer-links">
+      <address class="footer__links">
         <ul>
-          <li><a href="https://instagram.com/shomen_sports" rel="noopener">Instagram</a></li>
-          <li><a href="mailto:info@shomen-sports.com">info@shomen-sports.com</a></li>
+          <li><a class="handle" href="https://instagram.com/shomen_sports" rel="noopener">@shomen_sports</a></li>
+          <li><a class="micro micro--white" href="mailto:info@shomen-sports.com">info@shomen-sports.com</a></li>
         </ul>
       </address>
-      <p class="copyright">SHOMEN SPORTS © 2026</p>
+      <p class="micro footer__copy">SHOMEN © 2026</p>
     </div>
   </footer>
 

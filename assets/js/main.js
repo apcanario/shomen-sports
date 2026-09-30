@@ -50,11 +50,9 @@
   loadEls.forEach(function (el, i) {
     el.style.transitionDelay = (i * 120) + 'ms';
   });
-  window.requestAnimationFrame(function () {
-    window.requestAnimationFrame(function () {
-      loadEls.forEach(function (el) { el.classList.add('is-in'); });
-    });
-  });
+  window.setTimeout(function () {
+    loadEls.forEach(function (el) { el.classList.add('is-in'); });
+  }, 30);
 
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
