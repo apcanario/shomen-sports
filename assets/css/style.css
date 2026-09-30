@@ -1,7 +1,7 @@
 /* ==========================================================================
    Shomen Sports — Phase 1 stylesheet (content + layout only).
    No animations, no transitions, no gradients, no shadows. Plain hovers only.
-   Colour tokens come from the old Squarespace theme: docs/squarespace-tokens.md
+   Colour tokens come from the old site's theme: see the tokens document in docs/
    ========================================================================== */
 
 @font-face {
@@ -13,12 +13,12 @@
 }
 
 :root {
-  /* Extracted Squarespace 7.1 theme values (raw HSL triplets) */
+  /* Theme values extracted from the old site (raw HSL triplets) */
   --black-hsl: 235.71, 70%, 3.92%;    /* #030411 */
   --white-hsl: 60, 9.09%, 97.84%;     /* #FAFAF9 */
   --accent-hsl: 349.04, 100%, 54.9%;  /* #FF1943 */
 
-  /* Site palette (derivations documented in docs/squarespace-tokens.md) */
+  /* Site palette (derivations documented in the tokens document in docs/) */
   --color-bg: hsl(var(--black-hsl));
   --color-card: hsl(235.71, 70%, 8.92%);     /* black, lightness +5 → #070927 */
   --color-border: hsl(235.71, 70%, 15.92%);  /* black, lightness +12 → #0C1045 */
@@ -365,7 +365,7 @@ address {
 .hero {
   position: relative;
   display: grid;
-  min-height: 80vh;
+  min-height: min(80vh, 720px);
   isolation: isolate;
 }
 
@@ -417,6 +417,11 @@ address {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+/* Four-card teaser: narrower minimum so all four fit across at the 1100px max width */
+.grid-4 {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 .card {
