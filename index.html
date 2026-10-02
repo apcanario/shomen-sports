@@ -59,6 +59,7 @@
   --fs-body: 17px;
   --fs-micro: 13px;
   --track-micro: .14em;
+  --track-label: .06em;      /* readout + palmarés labels */
 
   --max: 1200px;
   --gutter: clamp(16px, 4vw, 40px);
@@ -133,8 +134,7 @@ button { font: inherit; }
 .readouts { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .readouts li { display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: baseline; padding: 9px 0; border-bottom: 1px solid var(--line); }
 .readouts .val { font-family: var(--font-mono); font-weight: 700; font-size: 20px; line-height: 1; color: var(--white); }
-.readouts .val:empty::before { content: "\2014"; color: var(--dim); }
-.readouts .lab { font-weight: 300; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; line-height: 1.35; }
+.readouts .lab { font-weight: 300; font-size: var(--fs-micro); letter-spacing: var(--track-label); text-transform: uppercase; line-height: 1.35; color: var(--grey); }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
 .chip { display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 0 12px; border: 1px solid var(--line); font-family: var(--font-mono); font-size: 14px; line-height: 1; color: var(--white); transition: border-color .25s var(--ease), color .25s var(--ease); }
 .chip:hover { border-color: var(--key); color: var(--key); }
@@ -180,7 +180,7 @@ img.pos-20 { object-position: 50% 20%; }
 .btn--primary { background-color: var(--key); border-color: var(--key); color: var(--bg); }
 .btn--primary:hover, .btn--primary:focus-visible { border-color: var(--white); }
 .btn--ghost { border-color: var(--line); }
-.btn--sm { min-height: 38px; padding: 0 14px; font-size: 12px; }
+.btn--sm { min-height: 38px; padding: 0 14px; }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .actions--center { justify-content: center; }
 .link-btn { display: inline-flex; align-items: center; gap: 10px; min-height: 40px; padding: 0; border: 0; background: none; color: var(--white); font-family: var(--font-sans); font-weight: 300; font-size: var(--fs-micro); letter-spacing: var(--track-micro); text-transform: uppercase; cursor: pointer; text-decoration: none; }
@@ -257,7 +257,7 @@ img.pos-20 { object-position: 50% 20%; }
 .tile__body { padding: 12px 12px 14px; display: grid; gap: 6px; align-content: start; }
 .tile__name, .tile__ref { display: block; }
 .tile__name { font-size: clamp(14px, 1.4vw, 17px); font-weight: 900; text-transform: uppercase; line-height: 1.1; letter-spacing: -.005em; margin: 0; transition: color .25s var(--ease); text-wrap: pretty; overflow-wrap: normal; }
-.tile__ref { font-family: var(--font-mono); font-size: 12px; color: var(--grey); display: flex; justify-content: space-between; gap: 8px; }
+.tile__ref { font-family: var(--font-mono); font-size: var(--fs-micro); color: var(--grey); display: flex; justify-content: space-between; gap: 8px; }
 .tile__ref .open { color: var(--key); opacity: 0; transform: translateX(-6px); transition: opacity .3s var(--ease), transform .3s var(--ease-out); }
 .tile__btn:hover .open, .tile__btn:focus-visible .open, .tile__btn[aria-expanded="true"] .open { opacity: 1; transform: none; }
 .tile__btn:hover .tile__name, .tile__btn[aria-expanded="true"] .tile__name { color: var(--key); }
@@ -328,9 +328,8 @@ html.js .thumbs--short li:nth-child(n+7) { display: none; }
 .palmares { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
 .palmares li { display: grid; gap: 5px; align-content: start; padding: 10px 12px 11px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .palmares .val { font-family: var(--font-mono); font-weight: 700; font-size: 22px; line-height: 1; color: var(--white); }
-.palmares .val:empty::before { content: "\2014"; color: var(--dim); }
-.palmares .lab { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; line-height: 1.3; color: var(--grey); }
-.palmares .lab .mono { font-size: 12px; color: var(--white); }
+.palmares .lab { font-size: var(--fs-micro); letter-spacing: var(--track-label); text-transform: uppercase; line-height: 1.3; color: var(--grey); }
+.palmares .lab .mono { color: var(--white); }
 @media (min-width: 720px) {
   .row { grid-template-columns: 168px minmax(0, 1fr); grid-template-areas: "thumb head" "thumb pal"; padding: 14px; gap: 12px 20px; }
   .row__thumb { aspect-ratio: auto; align-self: stretch; min-height: 100%; }
@@ -439,7 +438,7 @@ html.js .is-in .readouts li, html.js .more.is-open .readouts li, html.js .is-in 
 .readout--display .readout__value { font-size: clamp(56px, 12vw, 160px); }
 @media (min-width: 900px) { .fact__aside { display: grid; } }
 /* hero stats: three in one row on phones */
-@media (max-width: 719.98px) { .hero__stats .readout { padding: 2px 12px 0 10px; } .hero__stats .readout__label { font-size: 11px; letter-spacing: .1em; } }
+@media (max-width: 719.98px) { .hero__stats .readout { padding: 2px 12px 0 10px; } .hero__stats .readout__label { letter-spacing: .1em; } }
 /* contact band */
 .footband { padding-block: var(--space-sm) 24px; }
 .contact .h2 { font-size: clamp(34px, 7vw, 88px); }
@@ -504,7 +503,7 @@ html.js .is-in .readouts li, html.js .more.is-open .readouts li, html.js .is-in 
                 <a class="btn btn--lg" href="#atletas">Conhecer os atletas</a>
               </div>
               <ul class="hero__stats">
-                <li class="readout" style="--i: 0"><p class="micro readout__label">Atletas apoiados</p><p class="readout__value" data-settle>03</p></li>
+                <li class="readout" style="--i: 0"><p class="micro readout__label">Atletas apoiados</p><p class="readout__value" data-settle>04</p></li>
                 <li class="readout" style="--i: 1"><p class="micro readout__label">Produtos</p><p class="readout__value" data-settle>04</p></li>
                 <li class="readout" style="--i: 2"><p class="micro readout__label">Est.</p><p class="readout__value" data-settle>2025</p></li>
               </ul>
@@ -753,7 +752,7 @@ html.js .is-in .readouts li, html.js .more.is-open .readouts li, html.js .is-in 
               <button class="link-btn" type="button" aria-expanded="false" aria-controls="compromisso-more" data-toggle="compromisso-more" data-labels="Ler mais|Ler menos"><span>Ler mais</span></button>
             </div>
             <div class="fact__aside">
-              <div class="readout readout--display" data-reveal="right"><p class="micro readout__label">Atletas apoiados</p><p class="readout__value" data-settle>03</p></div>
+              <div class="readout readout--display" data-reveal="right"><p class="micro readout__label">Atletas apoiados</p><p class="readout__value" data-settle>04</p></div>
               <svg class="reticle" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8"/><g class="reticle__arms"><line x1="12" y1="0" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="24"/><line x1="0" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="24" y2="12"/></g><circle class="reticle__dot" cx="12" cy="12" r="1.5"/></svg>
             </div>
           </div>
@@ -785,7 +784,7 @@ html.js .is-in .readouts li, html.js .more.is-open .readouts li, html.js .is-in 
         <div class="section__head" data-reveal="left">
           <ul class="microbar">
             <li><p class="micro micro--dot" data-type>TEAM SHOMEN // ÉPOCA 2026/27</p></li>
-            <li><p class="micro"><span class="mono">ATLETAS // 03</span></p></li>
+            <li><p class="micro"><span class="mono">ATLETAS // 04</span></p></li>
           </ul>
           <h2 id="atletas-title">FIca A CONHECER OS NOSSOS ATLETAS</h2>
           <hr class="rule rule--key">
@@ -811,8 +810,8 @@ html.js .is-in .readouts li, html.js .more.is-open .readouts li, html.js .is-in 
               <!-- TODO: confirm André's Instagram handle (_aguiar05._ on the old site vs aguiar05. in the brief) --><a class="handle" href="https://www.instagram.com/_aguiar05._/" rel="noopener">@_aguiar05._</a>
             </div>
             <div class="row__pal">
-              <p class="micro">Palmarés <span class="mono">// 05</span></p>
-              <ul class="palmares"><li style="--i: 0"><span class="val"></span><span class="lab">Vencedor Karate1 Youth League Guadalajara <span class="mono">2025</span> Cadete <span class="mono">+70kg</span></span></li><li style="--i: 1"><span class="val"></span><span class="lab">Medalhista Karate1 Youth League Monterrey <span class="mono">2025</span> Junior <span class="mono">+76kg</span></span></li><li style="--i: 2"><span class="val"></span><span class="lab">Campeão Nacional FNK-P</span></li><li style="--i: 3"><span class="val">2x</span><span class="lab">Vencedor da Taça de Portugal FNK-P</span></li><li style="--i: 4"><span class="val"></span><span class="lab">Vencedor Taça da Liga FNK-P</span></li></ul>
+              <p class="micro">Palmarés <span class="mono">// 06</span></p>
+              <ul class="palmares"><li style="--i: 0"><span class="val">#6</span><span class="lab">WKF Ranking Junior <span class="mono">+76kg</span></span></li><li style="--i: 1"><span class="val">1x</span><span class="lab">Vencedor Karate1 Youth League Guadalajara <span class="mono">2025</span> Cadete <span class="mono">+70kg</span></span></li><li style="--i: 2"><span class="val">1x</span><span class="lab">Medalhista Karate1 Youth League Monterrey <span class="mono">2025</span> Junior <span class="mono">+76kg</span></span></li><li style="--i: 3"><span class="val">1x</span><span class="lab">Campeão Nacional FNK-P</span></li><li style="--i: 4"><span class="val">2x</span><span class="lab">Vencedor Taça de Portugal FNK-P</span></li><li style="--i: 5"><span class="val">1x</span><span class="lab">Vencedor Taça da Liga FNK-P</span></li></ul>
             </div>
           </li>
           <li class="panel panel--flush row" id="martim-sa" data-key="red" data-reveal style="--i: 2">
@@ -824,7 +823,19 @@ html.js .is-in .readouts li, html.js .more.is-open .readouts li, html.js .is-in 
             </div>
             <div class="row__pal">
               <p class="micro">Palmarés <span class="mono">// 01</span></p>
-              <ul class="palmares"><li style="--i: 0"><span class="val">5º</span><span class="lab">Lugar Open Lisboa <span class="mono">2025</span></span></li></ul>
+              <ul class="palmares"><li style="--i: 0"><span class="val">5º</span><span class="lab">Lugar Open de Lisboa <span class="mono">2025</span></span></li></ul>
+            </div>
+          <li class="panel panel--flush row" id="santiago-goncalves" data-key="blue" data-reveal style="--i: 3">
+            <div class="photo row__thumb zoom"><img src="assets/img/santiago-goncalves-800.webp" srcset="assets/img/santiago-goncalves-800.webp 800w, assets/img/santiago-goncalves-1600.webp 955w" sizes="(min-width: 720px) 168px, 104px" width="800" height="1000" loading="lazy" alt="Santiago Gonçalves em pé no pavilhão, com kimono Shomen, cinto azul e luvas de kumite"></div>
+            <div class="row__head">
+              <div class="row__idx"><p class="micro micro--dot">Atleta // <span class="mono">04</span></p><p class="micro"><span class="mono">WKF // KUMITE</span></p></div>
+              <h3 class="name"><span class="name__first">Santiago</span><span class="name__last">Gonçalves</span></h3>
+              <!-- TODO: Santiago's Instagram handle (not supplied) -->
+            </div>
+            <div class="row__pal">
+              <p class="micro">Palmarés <span class="mono">// 07</span></p>
+              <!-- TODO: confirm the national events are FNK-P (added for consistency with Leonor and André) -->
+              <ul class="palmares"><li style="--i: 0"><span class="val">1x</span><span class="lab">Campeão Nacional de Equipas FNK-P</span></li><li style="--i: 1"><span class="val">3º</span><span class="lab">Lugar Campeonato Nacional de Equipas FNK-P</span></li><li style="--i: 2"><span class="val">3º</span><span class="lab">Lugar Campeonato Nacional FNK-P</span></li><li style="--i: 3"><span class="val">2º</span><span class="lab">Lugar Taça de Portugal FNK-P</span></li><li style="--i: 4"><span class="val">3º</span><span class="lab">Lugar Taça de Portugal FNK-P</span></li><li style="--i: 5"><span class="val">1x</span><span class="lab">Vencedor Open de Vila das Aves</span></li><li style="--i: 6"><span class="val">3x</span><span class="lab">Vencedor Open de Monção, Entroncamento e Lourinhã</span></li></ul>
             </div>
           </li>
         </ul>
