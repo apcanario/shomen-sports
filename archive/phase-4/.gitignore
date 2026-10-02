@@ -1,0 +1,16 @@
+# Raw scrape of the old Squarespace site: the JSON is kept for content re-checks,
+# the rendered HTML/CSS bundles and inspection dumps are not.
+docs/scrape/*.html
+docs/scrape/*.css
+docs/scrape/_*
+docs/scrape/content-*.md
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+__pycache__/
+
+# Local tooling
+.claude/
