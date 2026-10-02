@@ -7,18 +7,15 @@ Static site, **one file**: `index.html` at the repo root contains all markup, CS
 - **Phase 1** (content + basic dark layout) → `archive/phase-1/`
 - **Phase 2** (HUD brand system, multi-page) → `archive/phase-2/`
 - **Phase 3** (single self-contained `index.html`, red + blue only, products as modals) → `archive/phase-3/`
-- **Phase 4** (branch `phase-4-onepager`, merged) → `archive/phase-4/`: truly one page, more compact, more motion. Products open **inline** in an expanding sheet under the tiles, Compromisso folds behind "Ler mais", the two bands became one statement strip, athletes are a roster with the **full palmarés as a grid of readouts** (Pedro's review: no "+ n"), the hero ends in a stats bar (CTAs + three settling numbers), contact lives in the footer band. Ambient HUD shapes drift behind the content and glitch (slice offsets); photos without faces get the same slice glitch. Layout is **Variant A "Directo"** of `docs/explorations/phase-4/` (products before Compromisso, full-bleed hero, accordion sheet, roster, top bar): chosen because it is the shortest path from hero to contact with nothing hidden behind a horizontal gesture. See the README there for the other two variants and the verdicts.
-- **Phase 5** (this, branch `phase-5`): content and polish on top of Phase 4. Santiago Gonçalves is the fourth roster row (blue), André opens with his `#6` WKF Junior +76kg ranking, every single result is `1x` (the `—` fallback for an empty `.val` is gone), event names follow one convention (see below), and the label styles were unified (`--track-label`, 13 px micro everywhere, no 11/12 px text, no `--dim` text). WCAG 2.1 AA checked: white 18.3:1, grey 7.2:1, red 5.4:1, blue 10.4:1 on `--bg`; `--bg` on the key colour (primary button) 5.4:1 / 10.4:1.
+- **Phase 4** (this, branch `phase-4-onepager`): truly one page, more compact, more motion. Products open **inline** in an expanding sheet under the tiles, Compromisso folds behind "Ler mais", the two bands became one statement strip, athletes are a roster with the **full palmarés as a grid of readouts** (Pedro's review: no "+ n"), the hero ends in a stats bar (CTAs + three settling numbers), contact lives in the footer band. Ambient HUD shapes drift behind the content and glitch (slice offsets); photos without faces get the same slice glitch. Layout is **Variant A "Directo"** of `docs/explorations/phase-4/` (products before Compromisso, full-bleed hero, accordion sheet, roster, top bar): chosen because it is the shortest path from hero to contact with nothing hidden behind a horizontal gesture. See the README there for the other two variants and the verdicts.
 - **Before starting any new phase**, copy everything in the repo (except `.git` and the contents of `archive/`) into a new versioned folder `archive/phase-N/` and commit that snapshot first. Pedro's rule, no exceptions.
 
 ## Compactness targets (Phase 4)
 
 | | Phase 3 | Phase 4 | target |
 |---|---|---|---|
-| 390 px (844 px viewport) | 10 802 px · 12.8 vh | 5 060 px · 6.0 vh | ≤ 5.5 vh |
-| 1280 px (800 px viewport) | 7 813 px · 9.8 vh | 4 346 px · 5.4 vh | ≤ 5 vh |
-
-Phase 5 (one more athlete, 13 px palmarés labels): **5 779 px · 6.8 vh** at 390, **4 730 px · 5.9 vh** at 1280. The growth is all roster; nothing above the products moved.
+| 390 px (844 px viewport) | 10 802 px · 12.8 vh | **5 060 px · 6.0 vh** | ≤ 5.5 vh |
+| 1280 px (800 px viewport) | 7 813 px · 9.8 vh | **4 346 px · 5.4 vh** | ≤ 5 vh |
 
 Measured with `document.body.scrollHeight`, sheet closed, `prefers-reduced-motion: reduce`. The first cut (4 412 / 3 985 px) met the targets; Pedro's review asked for the full palmarés always visible and a stronger hero bar, which is the ~650 / ~360 px above target. Hero ≤ 92 vh; the first product tile is on screen on scroll one at both widths. Keep it that way: anything added to the top of the page pushes the products down.
 
@@ -45,8 +42,7 @@ assets/img/originals/      Full-resolution photos and logo PNGs (never edit, nev
 assets/img/*-1600.webp, *-800.webp   Generated renditions
 assets/img/SOURCES.md      Where every original came from
 docs/explorations/phase-4/ The three skeleton variants (_build.py + _base.css/_base.js → variant-a/b/c.html) and README with verdicts
-docs/screenshots/phase-4/  Phase 4 review screenshots (390 + 1280, closed and with the sheet / reveals open) + explorations/
-docs/screenshots/phase-5/  Phase 5 screenshots (390 + 1280)
+docs/screenshots/phase-4/  Review screenshots (390 + 1280, closed and with the sheet / reveals open) + explorations/
 docs/scrape/*.json         Raw JSON of the old Squarespace site
 docs/PR-phase-4.md         PR description (variants, heights, motion inventory, veto list, tone-down candidates)
 tools/inline-assets.py     Embeds fonts + grain into index.html
@@ -69,18 +65,17 @@ CNAME, .nojekyll, robots.txt, sitemap.xml, favicon.ico, apple-touch-icon.png
 --fs-h2: clamp(40px, 7vw, 88px)     /* line-height 1.04, section titles */
 --fs-h2-band: clamp(26px, 3.6vw, 44px)   /* Compromisso heading; the strip uses clamp(20px, 2.4vw, 30px) */
 --fs-display: clamp(96px, 16vw, 220px)   /* the one display moment: "03" in Compromisso (capped at 160px there) */
---fs-body: 17px; --fs-micro: 13px   /* the only small size: micro-labels, palmarés/readout labels, tile refs, nav */
---track-micro: .14em; --track-label: .06em   /* palmarés + readout labels */
+--fs-body: 17px; --fs-micro: 13px
 --space: clamp(48px, 6vw, 80px); --space-sm: clamp(24px, 4vw, 48px); --gap: 16px; --nav-h: 60px
 ```
 
-**Highlights are red and blue only.** No green, no yellow, no other accent. Type: Tomorrow 300 Light + 900 Black (400 Regular only over photos), Geist Mono for numbers and codes, uppercase labels/headings. Headings with a hyphen (`Equipa-te`, `CONTACTa-NOS`) are wrapped in `.nobr` so they never break at the hyphen. One display moment per viewport: hero `h1`, the `04` (athletes count in Compromisso), the athletes title, `CONTACTa-NOS`; everything else stays small.
+**Highlights are red and blue only.** No green, no yellow, no other accent. Type: Tomorrow 300 Light + 900 Black (400 Regular only over photos), Geist Mono for numbers and codes, uppercase labels/headings. Headings with a hyphen (`Equipa-te`, `CONTACTa-NOS`) are wrapped in `.nobr` so they never break at the hyphen. One display moment per viewport: hero `h1`, the `03`, the athletes title, `CONTACTa-NOS`; everything else stays small.
 
 | Where | `data-key` |
 |---|---|
 | `<body>`, hero, Compromisso, strip, footer band | red |
 | `#produtos` section (tiles, sheet) and the gallery `<dialog>` | blue |
-| Roster rows | Leonor red, André blue, Martim red, Santiago blue (alternate; Guilherme would be red) |
+| Roster rows | Leonor red, André blue, Martim red, Guilherme blue, Santiago red (alternate) |
 
 `--dim` fails contrast on `--bg` (2.3:1): graphics only, never text. Key colour covers ≤ 4 % of any viewport (measured); keep it under 10 %.
 
@@ -135,9 +130,8 @@ Glitch is allowed since Pedro's Phase 4 review, **only** as horizontal slice off
 ## How to add or edit an athlete
 
 1. Photo into `assets/img/originals/`, run the optimiser.
-2. Copy an `<li class="panel panel--flush row">` in `#atletas`. Set `id`, `data-key` (next in the red/blue rotation), the photo (`.row__thumb`, 4:5, `alt` pt-PT, `pos-top` if the head is near the top; never `data-glitch` on a face), `ATLETA // NN`, the name (`.name__first` Light / `.name__last` Black), `@handle` (omit rather than guess), `PALMARÉS // NN` and every result as a cell of `ul.palmares`: `<li style="--i: n"><span class="val">7x</span><span class="lab">…</span></li>` (never an empty `.val`: a single win is `1x`; weights/years wrapped in `.mono`). The grid is 2 columns on phones, 3 from 720 px.
-   Naming convention (Phase 5): rankings `#N` + `WKF Ranking <escalão> <peso>`; titles `Nx` + `Campeão/Campeã Nacional FNK-P`, `Vencedor/Vencedora Taça de Portugal FNK-P`, `Vencedor Karate1 Youth League <cidade> <ano> <escalão> <peso>`; placings `Nº` + `Lugar <prova>`; opens are `Open de <localidade>`; several opens in one cell: `Nx Vencedor Open de A, B e C`.
-3. Update the counters: `ATLETAS // NN` and every `ATLETAS APOIADOS` readout (hero + Compromisso). Count only live rows. Guilherme Gonçalves is still pending photo + achievements (see TODOs).
+2. Copy an `<li class="panel panel--flush row">` in `#atletas`. Set `id`, `data-key` (next in the red/blue rotation), the photo (`.row__thumb`, 4:5, `alt` pt-PT, `pos-top` if the head is near the top; never `data-glitch` on a face), `ATLETA // NN`, the name (`.name__first` Light / `.name__last` Black), `@handle` (omit rather than guess), `PALMARÉS // NN` and every result as a cell of `ul.palmares`: `<li style="--i: n"><span class="val">7x</span><span class="lab">…</span></li>` (empty `.val` when the line has no leading numeral; weights/years wrapped in `.mono`). The grid is 2 columns on phones, 3 from 720 px.
+3. Update the counters: `ATLETAS // NN` and every `ATLETAS APOIADOS` readout (hero + Compromisso). Count only live rows. Guilherme and Santiago Gonçalves are still pending photo + achievements (see TODOs).
 
 ## Content rules (short version)
 
@@ -152,15 +146,14 @@ Glitch is allowed since Pedro's Phase 4 review, **only** as horizontal slice off
 
 - Compromisso copy is a Phase 3 draft for Pedro's review.
 - "Ultra Level" in the Corta Vento description is probably "Ultra Leve".
-- Martim Sá's and Santiago Gonçalves's Instagram handles are missing; André Aguiar's handle differs between the old site (`_aguiar05._`) and the rebuild brief (`aguiar05.`); Guilherme Gonçalves's row is not in the page yet (photo + achievements pending; the Phase 3 skeleton is in `archive/phase-3/index.html`).
-- Santiago's national results were supplied without a federation; `FNK-P` was added for consistency with Leonor and André and must be confirmed (`<!-- TODO -->` in the row).
+- Martim Sá's Instagram is missing; André Aguiar's handle differs between the old site (`_aguiar05._`) and the rebuild brief (`aguiar05.`); Guilherme and Santiago Gonçalves rows are not in the page yet (photo + achievements pending; the Phase 3 skeletons are in `archive/phase-3/index.html`).
 
 ## Checks before pushing
 
 ```bash
 python -m http.server 8000
-python tools/screenshots.py http://localhost:8000 docs/screenshots/phase-5 index   # 0 px overflow, 0 console errors
-python tools/motion-test.py http://localhost:8000                                   # 0 failures, prints page heights (expects the settle values 04,04,2025,04 and 20 palmarés cells)
+python tools/screenshots.py http://localhost:8000 docs/screenshots/phase-4 index   # 0 px overflow, 0 console errors
+python tools/motion-test.py http://localhost:8000                                   # 0 failures, prints page heights (expects the settle values 03,04,2025,03)
 grep -c 'url("assets/' index.html        # must be 0
 grep -n "green\|yellow\|glitch\|scanline\|border-radius" index.html   # only border-radius: 0
 grep -rin "squarespace\|€\|Carrinho\|Reservar\|cart\|prémio" index.html   # must be empty

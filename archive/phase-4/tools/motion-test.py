@@ -47,14 +47,14 @@ def motion(page, width):
     py = page.evaluate("document.querySelector('.hero__photo').style.getPropertyValue('--py')")
     check(f"{width}: hero parallax active ({'scroll-driven CSS' if sda else 'JS fallback'})", hero_t != "none" and (sda or py != ""), f"transform={hero_t[:40]} --py={py}")
     check(f"{width}: progress bar moves", page.evaluate("document.querySelector('.progress').style.transform") not in ("", "scaleX(0)"))
-    check(f"{width}: readouts settled to the real value", page.evaluate("[...document.querySelectorAll('[data-settle]')].map(e => e.textContent).join(',')") == "04,04,2025,04")
+    check(f"{width}: readouts settled to the real value", page.evaluate("[...document.querySelectorAll('[data-settle]')].map(e => e.textContent).join(',')") == "03,04,2025,03")
     check(f"{width}: type-on finished (no cursor left)", page.evaluate("document.querySelectorAll('[data-type].is-typing').length") == 0)
     # scroll spy
     page.evaluate("document.getElementById('atletas').scrollIntoView()")
-    page.wait_for_timeout(900)  # smooth scroll needs ~500 ms on the longer Phase 5 page
+    page.wait_for_timeout(500)
     check(f"{width}: scroll-spy follows Atletas", page.evaluate("document.querySelector('[data-spy][aria-current=\"true\"]')?.getAttribute('data-spy')") == "atletas")
     page.evaluate("document.getElementById('contacto').scrollIntoView()")
-    page.wait_for_timeout(900)
+    page.wait_for_timeout(500)
     check(f"{width}: scroll-spy follows Contacto", page.evaluate("document.querySelector('[data-spy][aria-current=\"true\"]')?.getAttribute('data-spy')") == "contacto")
     # product sheet with the keyboard
     page.evaluate("window.scrollTo(0, 0)")
@@ -91,7 +91,7 @@ def motion(page, width):
     page.locator("[data-toggle='compromisso-more']").click()
     page.wait_for_timeout(700)
     check(f"{width}: ler mais reveals the rest of Compromisso", page.evaluate("document.getElementById('compromisso-more').getBoundingClientRect().height") > 60)
-    check(f"{width}: full palmarés visible (20 results)", page.evaluate("[...document.querySelectorAll('.palmares li')].filter(l => l.offsetParent && getComputedStyle(l).opacity === '1').length") == 20)
+    check(f"{width}: full palmarés visible (12 results)", page.evaluate("[...document.querySelectorAll('.palmares li')].filter(l => l.offsetParent && getComputedStyle(l).opacity === '1').length") == 12)
     check(f"{width}: glitch layers present on photos without faces", page.evaluate("document.querySelectorAll('.photo[data-glitch] .glitch').length") == 8)
     page.evaluate("window.scrollBy(0, 120)")
     page.wait_for_timeout(100)
